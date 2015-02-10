@@ -1,0 +1,131 @@
+-- Table: attendance
+
+-- DROP TABLE attendance;
+
+CREATE TABLE attendance
+(
+  departmentid character varying(20),
+  employeeid character varying(20) NOT NULL,
+  employeename character varying(150),
+  attendance character varying(20),
+  date date NOT NULL,
+  CONSTRAINT date_empid PRIMARY KEY (date, employeeid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE attendance
+  OWNER TO postgres;
+
+
+****
+
+-- Table: department
+
+-- DROP TABLE department;
+
+CREATE TABLE department
+(
+  departmentid character varying(20) NOT NULL,
+  departmentname character varying(150),
+  managerid character varying(20),
+  CONSTRAINT departmentid_pkey PRIMARY KEY (departmentid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE department
+  OWNER TO postgres;
+
+
+  ****
+
+
+  -- Table: employee
+
+-- DROP TABLE employee;
+
+CREATE TABLE employee
+(
+  empid character varying(10) NOT NULL,
+  empname character varying(150) NOT NULL,
+  department character varying(150) NOT NULL,
+  dateofjoin date,
+  designation character varying(150),
+  CONSTRAINT empid_pkey PRIMARY KEY (empid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE employee
+  OWNER TO postgres;
+
+
+****
+
+
+-- Table: leave
+
+-- DROP TABLE leave;
+
+CREATE TABLE leave
+(
+  leaveid character varying(20) NOT NULL,
+  employeeid character varying(20),
+  fromdate date,
+  todate date,
+  reason character varying(200),
+  comments character varying(250),
+  approverid character varying(20),
+  CONSTRAINT leaveid_pkey PRIMARY KEY (leaveid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE leave
+  OWNER TO postgres;
+
+
+  ****
+
+
+  -- Table: shift
+
+-- DROP TABLE shift;
+
+CREATE TABLE shift
+(
+  shiftid character varying(20) NOT NULL,
+  employeeid character varying(20),
+  fromtime time with time zone,
+  totime time with time zone,
+  comments character varying(400),
+  CONSTRAINT shiftid_pkey PRIMARY KEY (shiftid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE shift
+  OWNER TO postgres;
+
+
+
+****
+
+-- Table: shiftallocation
+
+-- DROP TABLE shiftallocation;
+
+CREATE TABLE shiftallocation
+(
+  employeeid character varying(20) NOT NULL,
+  shiftid character varying(20) NOT NULL,
+  fromdate date,
+  todate date,
+  CONSTRAINT shiftid_empid_pkey PRIMARY KEY (employeeid, shiftid)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE shiftallocation
+  OWNER TO postgres;

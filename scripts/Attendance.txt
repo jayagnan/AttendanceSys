@@ -1,0 +1,31 @@
+
+
+Shift Allocation
+Shift allocation fromdate -> todate
+
+Employees max shift date is greater than yesterday. Then shift allocation to be done for those employees.
+
+Report
+Shift allocation report:
+
+Latest shift allocation -> show in red for employees whose shift allocation(max shift alloc date) is coming to an end.
+
+
+Attendance:
+
+Total attendance per month report. Pie chart. Green -> attendance - yellow -> leaves, red -> absentees (company and department wise)
+Attendance for whole company / --- day wise report / month - axis - (1,2 -> 30) and Number of employees
+Attendance for whole company / --- day wise report / week  axis - (mon,tue) and Number of employees
+
+Attendance for whole department / --- day wise report / month  axis - (1,2 -> 30) and Number of employees
+Attendance for whole department / --- day wise report / week  axis - (mon,tue) and Number of employees
+
+Attendance per employee -> report page - have department chosesn - then list all employees in department
+on select of employees
+
+Display the reports / per month (pie chart) or per week (pie chart)
+
+Also a tabular column based on department -> all employees and leaves -> basically a table
+
+
+

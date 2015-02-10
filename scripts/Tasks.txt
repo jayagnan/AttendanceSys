@@ -1,0 +1,19 @@
+Folder structure
+
+Simple flow:
+Make employee flow work
+Department
+Shift
+Shift allocation:
+
+Logic:
+attendance flow
+
+Report
+
+Employee
+Department
+Shift
+Shift Allocation -> get current shift allocation (today dates between from and todates)
+
+

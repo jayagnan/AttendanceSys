@@ -1,0 +1,15 @@
+{
+  "name": "attendance",
+  "version": "0.0.1",
+  "description": "Attendance System",
+  "main": "httpServer.js",
+  "dependencies": {
+    "pg": "~4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jayakumar",
+  "license": "public"
+}
