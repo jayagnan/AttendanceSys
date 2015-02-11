@@ -27,14 +27,12 @@ function onRequest(request,response){
 		request.addListener("end",
 			function(){
 				console.log("Data received request Listener 'end' =>"+data);
-				router.route(pathname,request,response,data,function(results){
-				response.writeHead(200, {'content-type': 'text/plain'});
-				response.end(results);
+				router.route(pathname,request,response,data);
 			}
 		);
 	}
-	);
-	}
+	
+	
 
 }
 

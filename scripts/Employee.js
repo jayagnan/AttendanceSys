@@ -34,11 +34,11 @@ module.exports={
 							}
 							console.log("=>Employee record added successfully!!!");
 							var response ="Employee record added successfully!!!";
-							//return response;
 							
-							//res.writeHead(200, {'content-type': 'text/plain'});
-							//res.end("Employee record added successfully!!!");
-							callback(response);
+							
+							res.writeHead(200, {'content-type': 'text/plain'});
+							res.end("Employee record added successfully!!!");
+							//callback(response);
 						});
 					},
 	updateEmployee : function(res,jsonStr){

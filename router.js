@@ -1,7 +1,7 @@
 var employee = require('./scripts/Employee');
 var department = require('./scripts/Department');
 
-function route(pathname,request,response,data,callback){
+function route(pathname,request,response,data){
 
 /*
 	if(methodof handle[pathname] === 'function')
@@ -44,9 +44,7 @@ function route(pathname,request,response,data,callback){
 		}
 
 		if(request.method === 'PUT'){
-			var results = employee.addEmployee(response,data,function(response){
-				callback(response);
-			});	
+			employee.addEmployee(response,data);	
 
 		}
 		

@@ -227,7 +227,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 		emp.Designation = $("#txtDesignation").val();
 
 		var jsonStr = JSON.stringify(emp);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -240,7 +240,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 				success: function(json){
 					//$("#contents").html(json);
 					var emps = JSON.parse(json);
-					alert(emps);
+					//alert(emps);
 					$("#txtEmployeeId").val(emps.EmployeeId);
 					$("#txtEmployeename").val(emps.EmployeeName);
 					$("#txtDepartmentId").val(emps.DepartmentId);
