@@ -9,13 +9,13 @@ var conString = "postgres://postgres@localhost:5432/Attendance";
 //var conString = "postgres://"+dbconfig.username+"@"+dbconfig.server+":"+dbconfig.port+"/"+db.dbname;
 
 try{
-var client = new pg.Client(conString);
+	var client = new pg.Client(conString);
 }
 catch(err){
 	console.error("Error occured while getting client "+err);
 }
-console.log("client => "+JSON.stringify(client));
-console.log("conString=> "+conString);
+//console.log("client => "+JSON.stringify(client));
+//console.log("conString=> "+conString);
 
 
 	console.log("Query => "+query);

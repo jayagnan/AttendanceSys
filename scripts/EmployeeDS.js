@@ -14,7 +14,23 @@ module.exports={
 		
 							var qry = query.getEmployeeByIdQry(emp);
 							executeQuery(qry,function(err,results){
+								if(err){
+									callback(err,results);
+								}
+								
+								var obj = results.rows[0];
+								if(obj){
+									var emp = {};
+									emp.EmployeeId = obj.empid;
+									emp.EmployeeName = obj.empname;
+									emp.DepartmentId = obj.department;
+									var date = new Date(obj.dateofjoin);
+									emp.DateOfJoin = date.getFullYear()+"-"+wrapDate(date.getMonth() + 1)+"-"+wrapDate(date.getDate());
+									emp.Designation = obj.designation;
+									results.rows = emp;
+								}
 								callback(err,results);
+
 							});
 						},
 		addEmployee : function(emp,callback){
@@ -42,3 +58,8 @@ module.exports={
 							});
 						}
 }
+
+
+var wrapDate = function(num){
+			return num < 10 ? "0" + num : ""+num;
+}				

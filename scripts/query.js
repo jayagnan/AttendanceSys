@@ -36,8 +36,9 @@ module.exports={
 					return qry;
 				},
 	getEmployeeByIdQry:function(emp){
-					var qry="select * from employee where employeeid={employeeid}";
-					qry.supplant({employeeid:emp.EmployeeId});
+					var qry="select * from employee where empid='{employeeid}'";
+					//console.log("Employee Id inside query ::: ===> "+emp.EmployeeId);
+					qry = qry.supplant({employeeid:emp.EmployeeId});
 					return qry;
 				},
 

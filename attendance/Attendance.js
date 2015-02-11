@@ -239,8 +239,8 @@ $("#contents").on("click","#btnGetEmp",function(){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
 					var emps = JSON.parse(json);
+					alert(emps);
 					$("#txtEmployeeId").val(emps.EmployeeId);
 					$("#txtEmployeename").val(emps.EmployeeName);
 					$("#txtDepartmentId").val(emps.DepartmentId);

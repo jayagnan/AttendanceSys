@@ -1,5 +1,5 @@
-var employee = require('./Employee');
-var department = require('./Department.js');
+var employee = require('./scripts/Employee');
+var department = require('./scripts/Department');
 
 function route(pathname,request,response,data,callback){
 

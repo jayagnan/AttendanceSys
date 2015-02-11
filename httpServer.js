@@ -31,12 +31,12 @@ function onRequest(request,response){
 				response.writeHead(200, {'content-type': 'text/plain'});
 				response.end(results);
 			}
-		});
+		);
 	}
 	);
 	}
 
 }
 
-http.createServer(onRequest).listen(8001);
+http.createServer(onRequest).listen(8081);
 console.log("Server is started!!!");
