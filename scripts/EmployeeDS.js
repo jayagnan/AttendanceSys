@@ -38,7 +38,7 @@ module.exports={
 							var addQry = query.getAddEmployeeQry(emp);
 							console.log("Inside Employee DS:: => "+addQry);
 							executeQuery(addQry,function(err,results){
-								console.log("Inside Employee DS, ** Callback ** :: => "+JSON.stringify(results.rows));
+								console.log("Inside Employee DS, ** Callback ** :: => "+JSON.stringify(results));
 
 								callback(err,results);
 							});

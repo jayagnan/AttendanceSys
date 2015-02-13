@@ -6,8 +6,8 @@ module.exports={
 							//var employee = JSON.parse(jsonStr);
 							empDs.getAllEmployees(function(err,results){
 								if(err){
-									console.log(err);
-									res.write("Unable to get all employees!!!");
+									res.writeHead(200, {'content-type': 'text/plain'});
+									res.end("Unable to get employee records!!! - "+err.detail);
 								}
 								console.log("=>Got employee information from DB!!!"+JSON.stringify(results.rows));
 								res.write(JSON.stringify(results.rows));
@@ -18,8 +18,8 @@ module.exports={
 							var employee = JSON.parse(jsonStr);
 							empDs.getEmployeeById(employee,function(err,results){
 								if(err){
-									console.log(err);
-									res.end("Unable to get employee info!!!");
+									res.writeHead(200, {'content-type': 'text/plain'});
+									res.end("Unable to get employee info!!! - "+err.detail);
 								}
 								console.log("=>Got employee information from DB!!!"+JSON.stringify(results.rows));
 								res.end(JSON.stringify(results.rows));
@@ -30,7 +30,8 @@ module.exports={
 						empDs.addEmployee(employee,function(err,results){
 							if(err){
 								console.log(err);
-								res.write("Unable to add employee record!!!");
+								res.writeHead(200, {'content-type': 'text/plain'});
+								res.end("Unable to add employee record!!! - "+err);
 							}
 							console.log("=>Employee record added successfully!!!");
 							var response ="Employee record added successfully!!!";
@@ -45,8 +46,8 @@ module.exports={
 						var employee = JSON.parse(jsonStr);
 						empDs.updateEmployee(employee,function(err,results){
 							if(err){
-								console.log(err);
-								res.end("Unable to update employee record!!!");
+								res.writeHead(200, {'content-type': 'text/plain'});
+								res.end("Unable to update employee record!!! - "+err.detail);
 							}
 							console.log("=>Employee record updated successfully!!!");
 							res.end("Employee record updated successfully!!!");
@@ -56,8 +57,8 @@ module.exports={
 						var employee = JSON.parse(jsonStr);
 						empDs.deleteEmployee(employee,function(err,results){
 							if(err){
-								console.log(err);
-								res.end("Unable to delete employee record!!!");
+								res.writeHead(200, {'content-type': 'text/plain'});
+								res.end("Unable to delete employee record!!! - "+err.detail);
 							}
 							console.log("=>Employee record deleted successfully!!!");
 							res.end("Employee record deleted successfully!!!");
