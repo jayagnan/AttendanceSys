@@ -12,19 +12,22 @@ module.exports={
 		getDepartmentById : function(dep,callback){
 							var getDepByIdQry = query.getDepartmentByIdQry(dep);
 							executeQuery(getDepByIdQry,function(err,results){
-								callback(err,results);
-							}
-                                                         var obj = results.rows[0];
+								if(err){
+									callback(err,results);
+								}
+							
+
+                                var obj = results.rows[0];
 								if(obj){
 									var dep = {};
-									dep.DepartmentId = obj.depid;
-									dep.DepartmentName = obj.depname;
+									dep.DepartmentId = obj.departmentid;
+									dep.DepartmentName = obj.departmentname;
 									dep.ManagerId = obj.managerid;
 									results.rows = dep;
 								}
 								callback(err,results);
-
 							});
+							
 						},
 		addDepartment : function(dep,callback){
 							var getAddQry = query.getAddDepartmentQry(dep);

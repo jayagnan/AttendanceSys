@@ -287,7 +287,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 				},
 				error:function(err){
 					console.log(err);
-					$("#contents").html("Error Occured while adding department!!!"+ err);
+					$("#contents").html("Error Occured while adding Department!!!"+ err);
 				}
 		});
 
@@ -299,14 +299,13 @@ $("#contents").on("click","#btnGetEmp",function(){
 	$("#contents").on("click","#btnUpdateDept",function(){
 
 		var url = "/attendance/department/";
-		var emp = {};
-		emp.EmployeeId = $("#txtEmployeeId").val();
-		emp.EmployeeName = $("#txtEmployeename").val();
-		emp.DepartmentId = $("#txtDepartmentId").val();
-		emp.DateOfJoin = $("#txtDateofjoin").val();
-		emp.Designation = $("#txtDesignation").val();
+		var dep = {};
+		dep.DepartmentId = $("#txtDepartmentId").val();
+		dep.DepartmentName = $("#txtDepartmentname").val();
+		dep.ManagerId = $("#txtManagerId").val();
+		
 
-		var jsonStr = JSON.stringify(emp);
+		var jsonStr = JSON.stringify(dep);
 		//alert(jsonStr);
 
 		$.ajax({
@@ -322,7 +321,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 				},
 				error:function(err){
 					console.log(err);
-					$("#contents").html("Error Occured while updating employee!!!"+ err);
+					$("#contents").html("Error Occured while updating Department!!!"+ err);
 				}
 		});
 });
@@ -330,14 +329,13 @@ $("#contents").on("click","#btnGetEmp",function(){
 	$("#contents").on("click","#btnDeleteDept",function(){
 
 		var url = "/attendance/department/";
-		var emp = {};
-		emp.EmployeeId = $("#txtEmployeeId").val();
-		emp.EmployeeName = $("#txtEmployeename").val();
-		emp.DepartmentId = $("#txtDepartmentId").val();
-		emp.DateOfJoin = $("#txtDateofjoin").val();
-		emp.Designation = $("#txtDesignation").val();
+		var dep = {};
+		dep.DepartmentId = $("#txtDepartmentId").val();
+		dep.DepartmentName = $("#txtDepartmentname").val();
+		dep.ManagerId = $("#txtManagerId").val();
+		
 
-		var jsonStr = JSON.stringify(emp);
+		var jsonStr = JSON.stringify(dep);
 		//alert(jsonStr);
 
 		$.ajax({
@@ -353,7 +351,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 				},
 				error:function(err){
 					console.log(err);
-					$("#contents").html("Error Occured while deleting employee!!!"+ err);
+					$("#contents").html("Error Occured while deleting Department!!!"+ err);
 				}
 		});
 });
@@ -362,14 +360,12 @@ $("#contents").on("click","#btnGetEmp",function(){
 $("#contents").on("click","#btnGetDept",function(){
 
 		var url = "/attendance/department/GET";
-		var emp = {};
-		emp.EmployeeId = $("#txtEmployeeId").val();
-		emp.EmployeeName = $("#txtEmployeename").val();
-		emp.DepartmentId = $("#txtDepartmentId").val();
-		emp.DateOfJoin = $("#txtDateofjoin").val();
-		emp.Designation = $("#txtDesignation").val();
-
-		var jsonStr = JSON.stringify(emp);
+		var dep = {};
+		dep.DepartmentId = $("#txtDepartmentId").val();
+		dep.DepartmentName = $("#txtDepartmentname").val();
+		dep.ManagerId = $("#txtManagerId").val();
+		
+		var jsonStr = JSON.stringify(dep);
 		alert(jsonStr);
 
 		$.ajax({
@@ -383,17 +379,15 @@ $("#contents").on("click","#btnGetDept",function(){
 				success: function(json){
 					//$("#contents").html(json);
 					alert(json);
-					var emps = JSON.parse(json);
-					$("#txtEmployeeId").val(emps.EmployeeId);
-					$("#txtEmployeename").val(emps.EmployeeName);
-					$("#txtDepartmentId").val(emps.DepartmentId);
-					$("#txtDateofjoin").val(emps.DateOfJoin);
-					$("#txtDesignation").val(emps.Designation);
-
+					var deps = JSON.parse(json);
+					$("#txtDepartmentId").val(deps.DepartmentId);
+					$("#txtDepartmentname").val(deps.DepartmentName);
+					$("#txtManagerId").val(deps.DepartmentId);
+					
 				},
 				error:function(err){
 					console.log(err);
-					$("#contents").html("Error Occured while Getting employee!!!"+ err);
+					$("#contents").html("Error Occured while Getting Department!!!"+ err);
 				}
 		});
 
@@ -402,96 +396,451 @@ $("#contents").on("click","#btnGetDept",function(){
 		//alert("After the call");
 
 	});
+$("#contents").on("click","#btnAddLeave",function(){
 
-/*******************************************************/
-
-
-
-
-
-
-	//Add project function
-
-	$("#contents").on("click","#btnAddProject",function(){
-
-	var url = "../portfolio/project";
-	alert($("#txtProjectName").val());
-
-
-			var Project = new Object();
-			Project.ProjectName = $("#txtProjectName").val();
-			Project.ProjectManager =  $("#txtProjectManager").val();
-			Project.CurrentStage =  $("#txtCurrentStage").val();
+		var url = "/attendance/Leave/";
+		var lev = {};
+		lev.LeaveId = $("#txtLeaveId").val();
+		lev.EmployeeId = $("#txtEmployeeId").val();
+		lev.FromDate = $("#txtFromDate").val();
+		lev.ToDate = $("#txtToDate").val();
+		lev.Reason = $("#txtReason").val();
+		lev.Comments = $("#txtComments").val();
+		lev.Approved = $("#txtApproved").val();
 
 
 
-			var JsonProject = JSON.stringify(Project);
+		var jsonStr = JSON.stringify(lev);
+		//alert(jsonStr);
 
-		alert(JsonProject);
+		$.ajax({
 
-		var jqxhr = $.post(url,JsonProject,function(data){
+				type:"PUT",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while adding Leave!!!"+ err);
+				}
+		});
 
-			alert("success");
-			alert(data);
-			$("#contents").html(data);
-			});
 
-		alert("After the call");
+		//alert("After the call");
 
 	});
 
+	$("#contents").on("click","#btnUpdateLeave",function(){
 
+		var url = "/attendance/Leave/";
+		var lev = {};
+		lev.LeaveId = $("#txtLeaveId").val();
+		lev.EmployeeId = $("#txtEmployeeId").val();
+		lev.FromDate = $("#txtFromDate").val();
+		lev.ToDate = $("#txtToDate").val();
+		lev.Reason = $("#txtReason").val();
+		lev.Comments = $("#txtComments").val();
+		lev.Approved = $("#txtApproved").val();
 
-/*
+		var jsonStr = JSON.stringify(lev);
+		//alert(jsonStr);
 
-	$("#btnAddProject").click(function(){
+		$.ajax({
 
-		alert("inside click");
-/*		var url = "http://localhost:8080/PortfolioMgmt/portfolio/project/listProjects";
-		var jqxhr = $.get(url,function(data,status){
-
-					alert("data :: "+data+" status ::"+status);
-
-				});
-
-				jqxhr.fail(function(jqXHR, textStatus, errorThrown){
-					alert("error");
-					alert("textStatus "+textStatus);
-					alert("ErrorThrown "+errorThrown);
-					});
-
-				alert("After the call");
-		//alert("status ::"+jqxhr.status);
-*/
-
-/*
-	var url = "../portfolio/project";
-	alert($("#txtProjectName").val());
-
-
-			var Project = new Object();
-			Project.ProjectName = $("#txtProjectName").val();
-			Project.ProjectManager =  $("#txtProjectManager").val();
-			Project.CurrentStage =  $("#txtCurrentStage").val();
-
-
-
-			var jsonString = JSON.stringify(Project);
-
-		alert(JsonProject);
-
-		var jqxhr = $.post(url,jsonString,function(data){
-
-			alert("success");
-			alert(data);
-			$("#contents").html(data);
-
-			});
-
-		alert("After the call");
-
-	});*/
-
-
-
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while updating Leave!!!"+ err);
+				}
+		});
 });
+
+	$("#contents").on("click","#btnDeleteLeave",function(){
+
+		var url = "/attendance/Leave/";
+		var lev = {};
+		lev.LeaveId = $("#txtLeaveId").val();
+		lev.EmployeeId = $("#txtEmployeeId").val();
+		lev.FromDate = $("#txtFromDate").val();
+		lev.ToDate = $("#txtToDate").val();
+		lev.Reason = $("#txtReason").val();
+		lev.Comments = $("#txtComments").val();
+		lev.Approved = $("#txtApproved").val();
+
+
+		var jsonStr = JSON.stringify(lev);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"DELETE",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while deleting Leave!!!"+ err);
+				}
+		});
+});
+
+
+$("#contents").on("click","#btnGetLeave",function(){
+
+        var url = "/attendance/Leave/GET";
+        var lev = {};
+		lev.LeaveId = $("#txtLeaveId").val();
+		lev.EmployeeId = $("#txtEmployeeId").val();
+		lev.FromDate = $("#txtFromDate").val();
+		lev.ToDate = $("#txtToDate").val();
+		lev.Reason = $("#txtReason").val();
+		lev.comments = $("#txtcomments").val();
+		lev.Approved = $("#txtApproved").val();
+
+		var jsonStr = JSON.stringify(lev);
+		alert(jsonStr);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					//$("#contents").html(json);
+					alert(json);
+					var levs = JSON.parse(json);
+					$("#txtLeaveId").val(levs.LeaveId);
+					$("#txtEmployeeId").val(levs.EmployeeId);
+					$("#txtFromDate").val(levs.Fromdate);
+					$("#txtToDate").val(levs.Todate);
+					$("#txtReason").val(levs.Reason);
+					$("#txtComments").val(levs.Comments);
+					$("#txtApproved").val(levs.Approved);
+
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while Getting Leave!!!"+ err);
+				}
+		});
+
+
+
+		//alert("After the call");
+
+	});
+$("#contents").on("click","#btnAddShift",function(){
+
+		var url = "/attendance/Shift/";
+		var shf = {};
+		shf.ShiftId = $("#txtShiftId").val();
+		shf.EmployeeId = $("#txtEmployeeId").val();
+		shf.FromTime = $("#txtFromTime").val();
+		shf.ToTime = $("#txtToTime").val();
+		shf.Comments = $("#txtComments").val();
+		
+
+
+
+		var jsonStr = JSON.stringify(shf);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"PUT",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while adding Shift!!!"+ err);
+				}
+		});
+
+
+		//alert("After the call");
+
+	});
+
+	$("#contents").on("click","#btnUpdateShift",function(){
+
+		var url = "/attendance/Shift/";
+		var shf = {};
+		shf.ShiftId = $("#txtShiftId").val();
+		shf.EmployeeId = $("#txtEmployeeId").val();
+		shf.FromTime = $("#txtFromTime").val();
+		shf.ToTime = $("#txtToTime").val();
+		shf.Comments = $("#txtComments").val();
+		
+
+		var jsonStr = JSON.stringify(shf);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while updating Shift!!!"+ err);
+				}
+		});
+});
+
+	$("#contents").on("click","#btnDeleteShift",function(){
+
+		var url = "/attendance/Shift/";
+		var shf = {};
+		shf.ShiftId = $("#txtShiftId").val();
+		shf.EmployeeId = $("#txtEmployeeId").val();
+		shf.FromTime = $("#txtFromTime").val();
+		shf.ToTime = $("#txtToTime").val();
+		shf.Comments = $("#txtComments").val();
+		
+
+
+		var jsonStr = JSON.stringify(shf);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"DELETE",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while deleting Shift!!!"+ err);
+				}
+		});
+});
+
+
+$("#contents").on("click","#btnGetShift",function(){
+
+        var url = "/attendance/Shift/GET";
+        var shf = {};
+		shf.ShiftId = $("#txtShiftId").val();
+		shf.EmployeeId = $("#txtEmployeeId").val();
+		shf.FromTime = $("#txtFromTime").val();
+		shf.ToTime = $("#txtToTime").val();
+		shf.Comments = $("#txtComments").val();
+		
+
+		var jsonStr = JSON.stringify(shf);
+		alert(jsonStr);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					//$("#contents").html(json);
+					alert(json);
+					var shfs = JSON.parse(json);
+					$("#txtShiftId").val(shfs.ShiftId);
+					$("#txtEmployeeId").val(shfs.EmployeeId);
+					$("#txtFromTime").val(shfs.FromTime);
+					$("#txtToTime").val(shfs.ToTime);
+					$("#txtComments").val(shfs.Comments);
+					
+
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while Getting Shift!!!"+ err);
+				}
+		});
+
+
+
+		//alert("After the call");
+
+	});
+$("#contents").on("click","#btnAddShiftAlloc",function(){
+
+		var url = "/attendance/ShiftAlloc/";
+		var shft = {};
+		shft.EmployeeId = $("#txtEmployeeId").val();
+		shft.ShiftId = $("#txtShiftId").val();
+		shft.FromDate = $("#txtFromDate").val();
+		shft.ToDate = $("#txtToDate").val();
+		
+
+
+
+		var jsonStr = JSON.stringify(shft);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"PUT",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while adding ShiftAllocation!!!"+ err);
+				}
+		});
+
+
+		//alert("After the call");
+
+	});
+
+	$("#contents").on("click","#btnUpdateShiftAlloc",function(){
+
+		var url = "/attendance/ShiftAlloc/";
+		var shft = {};
+		shft.EmployeeId = $("#txtEmployeeId").val();
+		shft.ShiftId = $("#txtShiftId").val();
+		shft.FromDate = $("#txtFromDate").val();
+		shft.ToDate = $("#txtToDate").val();
+		
+
+		var jsonStr = JSON.stringify(shft);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while updating ShiftAllocation!!!"+ err);
+				}
+		});
+});
+
+	$("#contents").on("click","#btnDeleteShiftAlloc",function(){
+
+		var url = "/attendance/ShiftAlloc/";
+		var shft = {};
+		shft.EmployeeId = $("#txtEmployeeId").val();
+		shft.ShiftId = $("#txtShiftId").val();
+		shft.FromDate = $("#txtFromDate").val();
+		shft.ToDate = $("#txtToDate").val();
+		
+
+
+		var jsonStr = JSON.stringify(shft);
+		//alert(jsonStr);
+
+		$.ajax({
+
+				type:"DELETE",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while deleting ShiftAllocation!!!"+ err);
+				}
+		});
+});
+
+
+$("#contents").on("click","#btnGetShift",function(){
+
+        var url = "/attendance/ShiftAlloc/GET";
+        var shft = {};
+		shft.EmployeeId = $("#txtEmployeeId").val();
+		shft.ShiftId = $("#txtShiftId").val();
+		shft.FromDate = $("#txtFromDate").val();
+		shft.ToDate = $("#txtToDate").val();
+		
+
+		var jsonStr = JSON.stringify(shft);
+		alert(jsonStr);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					//$("#contents").html(json);
+					alert(json);
+					var shfts = JSON.parse(json);
+					$("#txtEmployeeId").val(shfts.EmployeeId);
+					$("#txtShiftId").val(shfts.ShiftId);
+					$("#txtFromDate").val(shfts.FromDate);
+					$("txtToDate").val(shfts.ToDate);
+					
+					
+
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while Getting ShiftAllocation!!!"+ err);
+				}
+		});
+
+
+
+		//alert("After the call");
+
+	});
