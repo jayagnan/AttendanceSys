@@ -1,0 +1,63 @@
+<html>
+	<head>
+		<script src = "d3.v3.min.js"></script>
+		<style>
+
+			.chart rect {
+			  fill: steelblue;
+			}
+
+			.chart text {
+			  fill: white;
+			  font: 10px sans-serif;
+			  text-anchor: middle;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		<script>
+
+			var width = 1000, height = 1000;
+			var barWidth = 25;
+			var chartWidth = 800, chartHeight = 500;
+			var canvas = d3.select("body")
+							.append("svg")
+							.attr("width",width)
+							.attr("height",height)
+							.attr("class","chart")
+							
+			var yScale = d3.scale.linear()
+							.range([0,chartHeight]);
+
+
+			d3.json("report.json",function(data){
+			
+			yScale.domain([0, d3.max(data,function(d){return Number(d.NoOfEmployees);})]);
+			//xScale.domain([0, 12]);
+			//console.log("xScale "+xScale);
+			var bar = canvas.selectAll("g")
+							.data(data)
+							.enter()
+								.append("g")
+								.attr("transform",function(d,i){
+									return "translate("+barWidth*i+",0)";
+							 	});	
+				
+						bar.append("rect")
+							.attr("y",function(d){return chartHeight-yScale(d.NoOfEmployees);})
+							.attr("width",barWidth-1)
+							.attr("height",function(d){return yScale(d.NoOfEmployees);});
+
+						bar.append("text")
+							.attr("x", barWidth/2 - 2)
+							.attr("y",function(d){return chartHeight-yScale(d.NoOfEmployees) + 15 ;} )
+							.text(function(d){return d.NoOfEmployees;});		
+
+			});
+
+		</script>
+	</body>
+
+</html>

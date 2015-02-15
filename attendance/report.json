@@ -1,0 +1,17 @@
+[
+	{
+		"NoOfEmployees":"5",
+		"date":"1",
+		"day":"Monday"
+	},
+	{
+		"NoOfEmployees":"10",
+		"date":"2",
+		"day":"Tuesday"
+	},
+	{
+		"NoOfEmployees":"12",
+		"date":"3",
+		"day":"Wednesday"
+	}
+]
