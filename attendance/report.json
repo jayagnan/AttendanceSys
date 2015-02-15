@@ -1,17 +1,32 @@
 [
 	{
-		"NoOfEmployees":"5",
+		"NoOfEmployees":"50",
 		"date":"1",
 		"day":"Monday"
 	},
 	{
-		"NoOfEmployees":"10",
+		"NoOfEmployees":"100",
 		"date":"2",
 		"day":"Tuesday"
 	},
 	{
-		"NoOfEmployees":"12",
+		"NoOfEmployees":"1200",
 		"date":"3",
 		"day":"Wednesday"
+	},
+	{
+		"NoOfEmployees":"50",
+		"date":"4",
+		"day":"Thursday"
+	},
+	{
+		"NoOfEmployees":"100",
+		"date":"5",
+		"day":"Friday"
+	},
+	{
+		"NoOfEmployees":"1200",
+		"date":"7",
+		"day":"Saturday"
 	}
 ]
