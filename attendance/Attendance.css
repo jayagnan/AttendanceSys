@@ -16,6 +16,7 @@ a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 /*Add Leave html display */
 .title{font-family:"Gabriola"; font-size:50px;padding-left:20px;}
 /*#titleDepartment{font-family:"Verdana"; font-size:15px;padding-left:20px;}*/
+.fsAttendance{border:0px;}
 #fsEmployee{border:0px;}
 .lblAttendance{width:150px;text-align:left;font-family:Verdana;font-size:15px;float:left;word-wrap:nobreak;padding-right:5px;}
 .txtAttendance{width:300px;height:23px;}
