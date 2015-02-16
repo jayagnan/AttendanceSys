@@ -311,13 +311,39 @@ $("#contents").on("click","#btnGetDept",function(){
 					$("#contents").html("Error Occured while Getting Department!!!"+ err);
 				}
 		});
-
-
-
-		//alert("After the call");
-
 	});
 
+/************************REPORT*******************************************************/
+
+	$("#contents").on("click","#btnGetReport",function(){
+
+		drawBarChart();
+
+		/*
+		var url = "/attendance/attReport/";
+
+		var jsonStr = JSON.stringify(emp);
+		//alert(jsonStr);
+
+		$.ajax({
+				type:"PUT",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					$("#contents").html(json);
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while adding employee!!!"+ err);
+				}
+		});
+	*/
+
+
+	});
 
 
 });

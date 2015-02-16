@@ -4,14 +4,14 @@ body{background-color:#F6F4F0;font-family:verdana;font-size:12px;}
 
 /* Menu */
 li{list-style:none;line-height:200%;}
-#menu{width:300px;height:700px;float:left;border:1px solid #d3d3d3;}
+#menu{width:300px;height:800px;float:left;border:1px solid #d3d3d3;}
 .menuheader{color:green;font-size:22px;font-family:"Segoe Print",verdana;padding-left:40px;padding-top:25px;}
 a.hrefmenuitem{font-size:12px;font-family:verdana;text-decoration:none;padding-bottom:20px;}
 a.hrefmenuitem:link,a.hrefmenuitem:visited{color:#000000;}
 a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 
 /*Contents*/
-#contents{padding-left:20px;border:1px solid #d3d3d3;height:700px;font-size:12px;font-family:verdana;text-decoration:none;}
+#contents{padding-left:20px;border:1px solid #d3d3d3;height:800px;font-size:12px;font-family:verdana;text-decoration:none;}
 
 /*Add Leave html display */
 .title{font-family:"Gabriola"; font-size:50px;padding-left:20px;}
