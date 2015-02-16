@@ -92,8 +92,23 @@ $(document).ready(function(){
 			}
 
 		});
+	});
 
 
+$("#hrefAttendanceReport").click(function(){
+
+		$("#contents").load("AttendanceReport.html",function(responseTxt,statusTxt,xhr){
+
+			if(statusTxt == "success"){
+				//alert("External content loaded successfully");
+				//alert(responseTxt);
+			}
+			if(statusTxt == "error"){
+				alert("Error :" + xhr.status + ": " + xhr.statusText);
+
+			}
+
+		});
 
 	});
 

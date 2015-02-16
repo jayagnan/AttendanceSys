@@ -22,6 +22,12 @@ a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 .txtAttendance{width:300px;height:23px;}
 .btnAttendance{width:150px;height:50px;font-family:"Verdana";}
 
+/*Report related displays*/
+
+.lblAttReport{width:150px;text-align:left;font-family:Verdana;font-size:15px;}
+.btnAttReport{width:120px;height:30px;font-family:"Verdana";}
+.slctAttendance{width:100px;height:30px;font-family:"Verdana";}
+.fsAttReport{border:1px solid #d3d3d3;}
 
 /*Add Leave html display */
 #titleUpdateLeave{font-family:"Gabriola"; font-size:50px;padding-left:20px;}
@@ -37,6 +43,13 @@ a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 .lblMarkAttendance{width:150px;text-align:left;font-family:Verdana;font-size:15px;float:left;word-wrap:nobreak;padding-right:5px;}
 .txtMarkAttendance{width:300px;height:23px;}
 #btnMarkAttendance{width:150px;height:50px;font-family:"Verdana";}
+
+
+
+
+
+
+
 
 
 

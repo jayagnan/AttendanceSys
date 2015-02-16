@@ -1,0 +1,88 @@
+<html>
+	<head>
+		<script src = "d3.v3.min.js"></script>
+		<style>
+
+			.chart rect {
+			  fill: steelblue;
+			}
+
+			.chart text {
+			  fill: white;
+			  font: 10px sans-serif;
+			  text-anchor: middle;
+			}
+			.major text {
+			  fill: black;
+			  font: 10px sans-serif;
+			  text-anchor: middle;
+			}
+			.domain text {
+			  fill: blue;
+			  font: 10px sans-serif;
+			  
+			}
+
+			.axis text {
+			  font: 10px sans-serif;
+			}
+
+			.axis path,
+			.axis line {
+			  fill: none;
+			  stroke: #000;
+			  shape-rendering: crispEdges;
+			}
+
+		</style>
+	</head>
+	<body>
+
+		 <div class="title">Attendance Report</div>
+		 <fieldset id="fsAttReport" class="fsAttReport">
+            <p> 
+            	<label class="lblAttReport" for="Report"> Report: </label>
+            	<select id="slctReport" name ="slctReport" class="slctAttendance" >
+            		<option value="Daywise" >Day wise</option>
+            		<option value="Monthly" >Monthly</option>
+            	</select>	
+            </p>
+            <p>	
+            	
+            	<label class="lblAttReport" for="Month"> Month: </label>
+            	<select id="slctMonth" name ="slctMonth" class="slctAttendance" >
+            		<option value="Jan2015" >Jan 2015</option>
+            		<option value="Feb2015" >Feb 2015</option>
+            	</select>
+
+            	<span style="padding:10px;"></span>
+            	<label class="lblAttReport" for="Department"> Department: </label>
+            	<select id="slctDepartment" name ="slctDepartment" class="slctAttendance" >
+            		<option value="All" >All</option>
+            		<option value="Sales" >Sales</option>
+            		<option value="CustomerService" >Customer Service</option>
+            	</select>
+
+            	<span style="padding:10px;"></span>
+            	<label class="lblAttReport" for="Employee"> Employee: </label>
+            	<select id="slctEmployee" name ="slctEmployee" class="slctAttendance" >
+            		<option value="All" >All</option>
+            	</select>
+
+            
+
+            	<span style="padding:10px;"></span>
+            	<input type="button" name="btnGetEmployees" id="btnGetEmployees" class="btnAttReport" value="GetEmployees">
+            	</p>
+            <p>
+            	<span style="padding:10px;"></span>
+            	<input type="button" name="btnGetReport" id="btnGetReport" class="btnAttReport" value="GetReport">
+
+            </p>
+           
+            
+        </fieldset> 
+
+	</body>
+
+</html>
