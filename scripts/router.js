@@ -157,6 +157,9 @@ if(pathname.indexOf('/attendance/leave/') !== -1){
 		if(request.method === 'POST'){
 			if(pathname === '/attendance/shiftalloc/GET' ){
 				shiftalloc.getShiftAllocationById(response,data);
+			}else if(pathname === '/attendance/shiftallocdept/GET' ){
+				console.log("Router ==> "+data);
+				shiftalloc.getShiftAllocationForDept(response,data);
 			}else{
 				shiftalloc.updateShiftAllocation(response,data);
 			}

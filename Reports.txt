@@ -1,0 +1,21 @@
+Reports:
+
+x axis -> Day / Dates
+y axis -> No of employees present
+
+Json document:
+
+NoOfEmployees
+Date
+Day (Mon,Tue etc)
+
+With the above structure we can have the below reports:
+
+1. Monthly(day wise) attendance report - all employees - all departments
+2. Monthly attendance report - per department
+3. Monthly report(attendance, leave, absentees) - pie chart - all employees 
+4. Monthly report(attendance, leave, absentees) - pie chart - all employees per department
+5. Montly leave report
+6. Monthly absentees report
+7. Monthly attendance (per employee) -> calendar chart - report
+

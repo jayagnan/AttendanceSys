@@ -163,6 +163,18 @@ module.exports={
 		return qry;
 	},
 
+	getShiftAllocationForDeptQry : function(shiftalloc){
+		var qry = "";
+		if(shiftalloc.DepartmentId && shiftalloc.DepartmentId!==''){
+		 qry = "SELECT empid, empname, department, designation, shiftallocation.shiftid FROM employee  left outer join shiftallocation on employee.empid = shiftallocation.employeeid and current_date >= shiftallocation.fromdate and shiftallocation.todate >= current_date where department = '{departmentid}'";
+		}
+		else{
+		 qry = "SELECT empid, empname, department, designation, shiftallocation.shiftid FROM employee  left outer join shiftallocation on employee.empid = shiftallocation.employeeid and current_date >= shiftallocation.fromdate and shiftallocation.todate >= current_date";
+		}
+		qry = qry.supplant({departmentid:shiftalloc.DepartmentId,employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
+		return qry;
+	},	
+
 	//ATTENDANCE QUERIES
 	getAllAttendanceQry:function(){
 		var qry = "SELECT departmentid, employeeid, employeename, attendance, date FROM attendance";

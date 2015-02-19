@@ -95,6 +95,24 @@ $(document).ready(function(){
 	});
 
 
+	$("#hrefAddShiftAllocation").click(function(){
+
+		$("#contents").load("ShiftAllocation.html",function(responseTxt,statusTxt,xhr){
+
+			if(statusTxt == "success"){
+				//alert("External content loaded successfully");
+				//alert(responseTxt);
+			}
+			if(statusTxt == "error"){
+				alert("Error :" + xhr.status + ": " + xhr.statusText);
+
+			}
+
+		});
+	});
+
+
+
 $("#hrefAttendanceReport").click(function(){
 
 		$("#contents").load("AttendanceReport.html",function(responseTxt,statusTxt,xhr){
@@ -344,6 +362,71 @@ $("#contents").on("click","#btnGetDept",function(){
 
 
 	});
+
+/************************SHIFT ALLOC*******************************************************/
+
+$("#contents").on("click","#btnGetShiftAllocDept",function(){
+
+		var url = "/attendance/shiftallocdept/GET";
+		var shftalloc = {};
+		shftalloc.DepartmentId = $("#slctDepartment").val();
+
+
+		var jsonStr = JSON.stringify(shftalloc);
+		alert(jsonStr + url);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					//$("#contents").html(json);
+					alert(json);
+					var shftallocs = JSON.parse(json);
+					//alert(shftallocs);
+					var shft = {};
+					var html = "";
+					html = "<table>"
+					html += "<tr><th>EmpId</th><th>Empname</th><th>Department</th><th>Designation</th><th>ShiftId</th><th>Allocate</th></tr>";
+					for(var i=0;i<shftallocs.length;i++){
+						//alert(JSON.stringify(shftallocs[i]));
+						var empid = shftallocs[i].empid;
+						var empname = shftallocs[i].empname;
+						var department = shftallocs[i].department;
+						var designation = shftallocs[i].designation;
+						var shiftid = shftallocs[i].shiftid;
+						if(!shiftid){
+							var button = "<input type='button' id='empid' value='AddAlloc' />";
+						} else{
+							var button = "<input type='button' id='empid' value='UpdateAlloc' />";
+						}
+
+					html += "<tr><td>"+empid+"</td><td>"+empname+"</td><td>"+department+"</td><td>"+designation+"</td><td>"+shiftid+"</td><td>"+button+"</td></tr>";	
+
+					}
+					html += "</table>";
+
+					$("#divAllocTable").html(html);
+
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while Getting employee!!!"+ err);
+				}
+		});
+
+
+
+		//alert("After the call");
+
+	});
+
+/************************SHIFT ALLOC*******************************************************/
+
 
 
 });

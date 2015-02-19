@@ -21,17 +21,14 @@ module.exports={
 									var Shift = {};
 									Shift.EmployeeId = obj.empid;
 									Shift.ShiftId = obj.ShiftId;
-									var date = new Date(obj.from date);
-									Shift.from date = date.getFullYear()+"-"+wrapDate(date.getMonth() + 1)+"-"+wrapDate(date.getDate());
-                                                                        var date1 =new Date(obj.to date);
-                                                                        Shift.to date = date.getFullYear()+"-"+wrapDate(date.getMonth() + 1)+"-"+wrapDate(date.getDate());                 
+									var date = new Date(obj.fromdate);
+									Shift.fromdate = date.getFullYear()+"-"+wrapDate(date.getMonth() + 1)+"-"+wrapDate(date.getDate());
+                                    var date1 =new Date(obj.todate);
+                                    Shift.todate = date.getFullYear()+"-"+wrapDate(date.getMonth() + 1)+"-"+wrapDate(date.getDate());                 
 									results.rows = Shift;
 								}
 								callback(err,results);
 
-							});
-						},
-                                                        
 							});
 						},
 		addShiftAllocation : function(shiftalloc,callback){
@@ -54,7 +51,15 @@ module.exports={
 							executeQuery(deleteqry,function(err,results){
 								callback(err,results);
 							});
-						}											
+						},
+
+		getShiftAllocationForDept:  function(shiftalloc,callback){
+							var qry = query.getShiftAllocationForDeptQry(shiftalloc);
+							console.log("Shift allocation qry"+qry);
+							executeQuery(qry,function(err,results){
+								callback(err,results);
+							});
+						}															
 }
 var wrapDate = function(num){
 			return num < 10 ? "0" + num : ""+num;

@@ -1,5 +1,7 @@
 var employee = require('./scripts/Employee');
 var department = require('./scripts/Department');
+var shiftalloc = require('./scripts/ShiftAlloc');
+
 
 function route(pathname,request,response,data){
 
@@ -79,6 +81,47 @@ function route(pathname,request,response,data){
 		
 		if(request.method === 'DELETE'){
 			department.deleteDepartment(response,data);			
+		}
+	}
+
+	/***********************SHIFT ALLOCATION **************************/
+
+	if(pathname.indexOf('/attendance/shiftalloc/') !== -1){
+
+		if(request.method === 'GET'){
+			console.log("PathName => "+ pathname + "GET Request");
+			if(data === null){
+				shiftalloc.getAllShiftAllocation(response);
+			}
+			else{				
+				shiftalloc.getShiftAllocationById(response,data);
+			}
+		}
+
+		if(request.method === 'POST'){
+			if(pathname === '/attendance/shiftalloc/GET' ){
+				shiftalloc.getShiftAllocationById(response,data);
+			}else{
+				shiftalloc.updateShiftAllocation(response,data);
+			}
+		}
+
+		if(request.method === 'PUT'){
+			shiftalloc.addShiftAllocation(response,data);	
+
+		}
+		
+		if(request.method === 'DELETE'){
+			shiftalloc.deleteShiftAllocation(response,data);			
+		}
+	}
+
+
+	if(pathname.indexOf('/attendance/shiftallocdept/') !== -1){
+
+		if(pathname === '/attendance/shiftallocdept/GET' ){
+				console.log("Router ==> "+data);
+				shiftalloc.getShiftAllocationForDept(response,data);
 		}
 	}
 

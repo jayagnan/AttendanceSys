@@ -56,7 +56,19 @@ module.exports={
 							console.log("=>ShiftAllocation record deleted successfully!!!");
 							res.write("ShiftAllocation record deleted successfully!!!");
 						});
-					}
+					},
+	getShiftAllocationForDept : function(res,jsonStr){
+				console.log("Shift allocation "+jsonStr);
+							var shiftAlloc = JSON.parse(jsonStr);
+							shfDs.getShiftAllocationForDept(shiftAlloc,function(err,results){
+								if(err){
+									console.log(err);
+									res.end("Unable to get all ShiftAllocation!!!");
+								}
+								console.log("=>Got ShiftAllocation information from DB!!!"+JSON.stringify(results.rows));
+								res.end(JSON.stringify(results.rows));
+							});
+						},				
 
 		
 }
