@@ -1,6 +1,8 @@
 var employee = require('./scripts/Employee');
 var department = require('./scripts/Department');
 var shiftalloc = require('./scripts/ShiftAlloc');
+var att = require('./scripts/Attendance');
+
 
 
 function route(pathname,request,response,data){
@@ -122,6 +124,16 @@ function route(pathname,request,response,data){
 		if(pathname === '/attendance/shiftallocdept/GET' ){
 				console.log("Router ==> "+data);
 				shiftalloc.getShiftAllocationForDept(response,data);
+		}
+	}
+
+	/*********************ATTENDANCE***************************/
+
+	if(pathname.indexOf('/attendance/attendance/') !== -1){
+
+		if(pathname === '/attendance/attendance/GETBYDATE' ){
+				console.log("Router ==> "+data);
+				att.getAttendanceByDate(response,data);
 		}
 	}
 

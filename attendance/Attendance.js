@@ -5,9 +5,21 @@ $(document).ready(function(){
 
 	$("#hrefMarkAttendance").click(function(){
 
+		var now = new Date();
+	    var month = (now.getMonth() + 1);               
+	    var day = now.getDate();
+	    if(month < 10) 
+	        month = "0" + month;
+	    if(day < 10) 
+	        day = "0" + day;
+	    var today = now.getFullYear() + '-' + month + '-' + day;
+	   
+
 		$("#contents").load("Attendance.html",function(responseTxt,statusTxt,xhr){
 
 				if(statusTxt == "success"){
+
+					$("#dtAttendance").val(today);
 								//alert("External content loaded successfully");
 								//alert(responseTxt);
 				}
@@ -439,6 +451,63 @@ $("#contents").on("click",".btnalloc",function(data){
 
 /************************SHIFT ALLOC*******************************************************/
 
+/************************ATTENDANCE*******************************************************/
+
+$("#contents").on("click","#btnGetAttendance",function(data){
+
+	alert("In get attendance");
+
+		
+		var url = "/attendance/attendance/GETBYDATE";
+		var att = {};
+		att.ShiftId = $("#slctShiftId").val();
+		att.DepartmentId = $("#slctDepartment").val();
+		att.Date = $("#dtAttendance").val();
+		
+		var jsonStr = JSON.stringify(att);
+		alert(jsonStr);
+
+		$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					//$("#contents").html(json);
+					alert(json);
+					var markatt = {};
+					markatt = JSON.parse(json);
+					var html = "<table><tr><th>EmployeeId</th><th>Employee Name</th><th>Department</th><th>Designation</th><th>Shift</th><th>Attendance</th></tr>";
+					
+					for(var i=0; i<markatt.length;i++){
+
+						var empid = markatt[i].empid;
+						var empname = markatt[i].empname;
+						var dept = markatt[i].department;
+						var designation = markatt[i].designation;
+						var shiftid = markatt[i].shiftid;
+						var attendance = markatt[i].attendance;
+
+						html += "<tr><td>"+empid+"</td><td>"+empname+"</td><td>"+dept+"</td><td>"+designation+"</td><td>"+shiftid+"</td><td>"+attendance+"</td>     </tr>";
+					}
+					html += "</table>";
+
+					$("#divAttendance").html(html);
+					
+				},
+				error:function(err){
+					console.log(err);
+					$("#contents").html("Error Occured while Getting Attendance Info!!!"+ err);
+				}
+		});
+});
+
+
+
+/************************ATTENDANCE*******************************************************/
 
 
 });

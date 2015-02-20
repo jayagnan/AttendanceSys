@@ -222,10 +222,15 @@ module.exports={
 		var whereqry = "";
 		if(depqry !== "" || shftqry !== ""){
 
-			whereqry = "where "+depqry+" "+shftqry;
+			whereqry = " where ";
+			if(depqry !== ""){
+				whereqry += depqry+" and ";
+			}
+
+			whereqry += shftqry;
 		}
 
-		qry += whereqry;
+		qry += whereqry + " order by empid";
 
 		qry = qry.supplant({'attDate':att.Date});
 		return qry;		
