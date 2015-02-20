@@ -9,34 +9,35 @@ module.exports={
 								callback(err,results);
 							});
 						},
-		getAttendanceByEmp : function(shiftalloc,callback){
-							var qry = query.getAttendanceByEmpQry(shiftalloc);
+		getAttendanceByEmp : function(att,callback){
+							var qry = query.getAttendanceByEmpQry(att);
 							executeQuery(qry,function(err,results){
 								callback(err,results);
 							});
 						},
-		getAttendanceByDate : function(shiftalloc,callback){
-							var qry = query.getAttendanceByDateQry(shiftalloc);
+		addAttendance : function(att,callback){
+							var qry = query.getAddAttendanceQry(att);
 							executeQuery(qry,function(err,results){
 								callback(err,results);
 							});
 						},
-		addAttendance : function(shiftalloc,callback){
-							var qry = query.getAddAttendanceQry(shiftalloc);
+		updateAttendance : function(att,callback){
+							var qry = query.getUpdateAttendanceQry(att);
 							executeQuery(qry,function(err,results){
 								callback(err,results);
 							});
 						},
-		updateAttendance : function(shiftalloc,callback){
-							var qry = query.getUpdateAttendanceQry(shiftalloc);
+		deleteAttendance : function(att,callback){
+							var qry = query.getDeleteAttendanceQry(att);
 							executeQuery(qry,function(err,results){
 								callback(err,results);
 							});
 						},
-		deleteAttendance : function(shiftalloc,callback){
-							var qry = query.getDeleteAttendanceQry(shiftalloc);
+		getAttendanceByDate : function(att,callback){
+							var qry = query.getAttendanceByDateQry(att);
 							executeQuery(qry,function(err,results){
 								callback(err,results);
 							});
-						}											
+						}
+
 }

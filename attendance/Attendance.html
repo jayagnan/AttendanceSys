@@ -1,54 +1,39 @@
 <html>
-<head></head>
-<body bgcolor="#a9a9a9">
+	<head>
+	</head>
+	<body>
 
-<div id="MarkAttendance">
+		 <div class="title">Attendance</div>
+		 <fieldset id="fsMarkAtt" class="fsMarkAtt">
+             <p>	
+            	
+            	<label class="lblAttReport" for="ShiftId"> Shift: </label>
+            	<select id="slctShiftId" name ="slctShiftId" class="slctAttendance" >
+            		<option value="S001" >Morning Shift</option>
+            		<option value="S002" >Evening Shift</option>
+            	</select>
 
-    <form id="Attendance" name="Attendance">
-        <div id="titleMarkAttendance">Mark Attendance</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Department</th><th>Employee Id</th><th>Employee Name</th><th>Attendance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Customer Service</td><td>ESLR00001</td><td>Saravana Kumar</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
-                <tr class="even">
-                    <td>Customer Service</td><td>ESLR00021</td><td>Pradeep</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
-                <tr>
-                    <td>Customer Service</td><td>ESLR00003</td><td>Keerthana</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row --> <tr class="leave">
-                    <td>Purchase</td><td>ESLR00025</td><td>Ashok Kumar</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
-                <tr class="even">
-                    <td>Purchase</td><td>ESLR00032</td><td>Sebastian John</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row --> <tr>
-                    <td>Purchase</td><td>ESLR00035</td><td>Ivin Charles</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
-                <tr class="even">
-                    <td>Sales</td><td>ESLR00045</td><td>Suguna</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row --> <tr>
-                    <td>Sales</td><td>ESLR00046</td><td>Sundar </td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
-                <tr class="even">
-                    <td>Sales</td><td>ESLR00037</td><td>Karthikeyan</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
-                <tr class="even">
-                    <td>Accounts</td><td>ESLR00381</td><td>Kumaresan</td><td><input type="checkbox" checked></td>
-                </tr><!-- Table Row -->
+            	<span style="padding:10px;"></span>
+            	<label class="lblAttReport" for="Department"> Department: </label>
+            	<select id="slctDepartment" name ="slctDepartment" class="slctAttendance" >
+            		<option value="All" >All</option>
+            		<option value="Sales" >Sales</option>
+            		<option value="CustomerService" >Customer Service</option>
+            	</select>
 
-            </tbody>
-        </table>
-        <fieldset id="fsMarkAttendance">
-            <p style="padding-top:70px;"><span style="padding:20px;"></span><input type="button" name="Submit" id="btnUpdateLeave" value="Submit"></p>
-        </fieldset>
-    </form>
-</div>
+            	<span style="padding:10px;"></span>
+            	<label class="lblAttReport" for="Date"> Date: </label>
+            	<input type="date" id="dtAttendance"></input>
 
 
-</body>
+            	<span style="padding:10px;"></span>
+            	<input type="button" name="btnGetAttendance" id="btnGetAttendance" class="btnAttReport" value="GetAttendance">
+           	</p>
+            
+            
+        </fieldset> 
+        <div id="divAttendance"></div>
+
+	</body>
+
 </html>

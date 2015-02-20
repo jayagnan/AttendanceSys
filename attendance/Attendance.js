@@ -362,7 +362,7 @@ $("#contents").on("click","#btnGetDept",function(){
 
 
 	});
-
+/************************REPORT*******************************************************/
 /************************SHIFT ALLOC*******************************************************/
 
 $("#contents").on("click","#btnGetShiftAllocDept",function(){
@@ -400,9 +400,10 @@ $("#contents").on("click","#btnGetShiftAllocDept",function(){
 						var designation = shftallocs[i].designation;
 						var shiftid = shftallocs[i].shiftid;
 						if(!shiftid){
-							var button = "<input type='button' id='empid' value='AddAlloc' />";
+							shiftid = "Not allocated";
+							var button = "<input type='button' class='btnalloc' data-empid="+empid+ " data-shiftid="+shiftid+" value='AddAlloc' id="+empid+" />";
 						} else{
-							var button = "<input type='button' id='empid' value='UpdateAlloc' />";
+							var button = "<input type='button' class='btnalloc' data-empid="+empid+ " data-shiftid="+shiftid+" value='UpdateAlloc' id="+empid+" />";
 						}
 
 					html += "<tr><td>"+empid+"</td><td>"+empname+"</td><td>"+department+"</td><td>"+designation+"</td><td>"+shiftid+"</td><td>"+button+"</td></tr>";	
@@ -418,12 +419,23 @@ $("#contents").on("click","#btnGetShiftAllocDept",function(){
 					$("#contents").html("Error Occured while Getting employee!!!"+ err);
 				}
 		});
+	});
 
 
+$("#contents").on("click",".btnalloc",function(data){
+	var ele = data.toElement;	
+	$("#contents").load("Employee.html",function(responseTxt,statusTxt,xhr){
 
-		//alert("After the call");
+		if(statusTxt == "success"){
+			$('#txtEmployeeId').val(ele.id);
+		}
+		if(statusTxt == "error"){
+			alert("Error :" + xhr.status + ": " + xhr.statusText);
+
+		}
 
 	});
+});
 
 /************************SHIFT ALLOC*******************************************************/
 

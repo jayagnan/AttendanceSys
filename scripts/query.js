@@ -187,12 +187,6 @@ module.exports={
 		return qry;		
 	},
 
-	getAttendanceByDateQry:function(att){
-		var qry = "SELECT departmentid, employeeid, employeename, attendance, date FROM attendance where date='{date}'";
-		qry.supplant({departmentid:att.DepartmentId, employeeid:att.EmployeeId, employeename:att.EmployeeName, attendance:att.Attendance, date:att.Today});
-		return qry;		
-	},
-
 	getAddAttendanceQry:function(att){
 		var qry = "INSERT INTO attendance(departmentid, employeeid, employeename, attendance, date) VALUES ('{departmentid}', '{employeeid}', '{employeename}', '{attendance}', '{date}')";
 		qry.supplant({departmentid:att.DepartmentId, employeeid:att.EmployeeId, employeename:att.EmployeeName, attendance:att.Attendance, date:att.Today});
@@ -209,5 +203,34 @@ module.exports={
 		var qry = "DELETE FROM attendance WHERE employeeid = '{employeeid}' and date = '{date}'";
 		qry.supplant({departmentid:att.DepartmentId, employeeid:att.EmployeeId, employeename:att.EmployeeName, attendance:att.Attendance, date:att.Today});
 		return qry;				
+	},
+
+	getAttendanceByDateQry:function(att){
+		var qry = "SELECT empid, empname, department, designation, shiftallocation.shiftid, attendance.attendance FROM employee left outer join shiftallocation on employee.empid = shiftallocation.employeeid and '{attDate}' >= fromdate and todate <= '{attDate}' left outer join attendance on employee.empid = attendance.employeeid and '{attDate}' = attendance.date";
+		
+		//constructing where query
+		var depqry = "";
+		if(att.DepartmentId && att.DepartmentId !== ""){
+			 depqry = "employee.department = '"+att.DepartmentId+"'";
+		}
+
+		var shftqry = "";
+		if(att.ShiftId && att.ShiftId !== ""){
+			 shftqry = "shiftallocation.shiftid = '"+att.ShiftId+"'";
+		}
+
+		var whereqry = "";
+		if(depqry !== "" || shftqry !== ""){
+
+			whereqry = "where "+depqry+" "+shftqry;
+		}
+
+		qry += whereqry;
+
+		qry = qry.supplant({'attDate':att.Date});
+		return qry;		
 	}
+
+
+
 }
