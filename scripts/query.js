@@ -224,9 +224,11 @@ module.exports={
 
 			whereqry = " where ";
 			if(depqry !== ""){
-				whereqry += depqry+" and ";
+				whereqry += depqry;
 			}
-
+			if(shftqry !== "" && depqry !==""){
+				whereqry += " and ";
+			}
 			whereqry += shftqry;
 		}
 
