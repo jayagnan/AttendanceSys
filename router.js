@@ -134,6 +134,10 @@ function route(pathname,request,response,data){
 		if(pathname === '/attendance/attendance/GETBYDATE' ){
 				console.log("Router ==> "+data);
 				att.getAttendanceByDate(response,data);
+		} 
+		if(pathname === '/attendance/attendance/MarkAttendance' ){
+				console.log("Router ==> "+data);
+				att.markAttendance(response,data);
 		}
 	}
 

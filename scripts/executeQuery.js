@@ -1,4 +1,4 @@
-module.exports = function(query,callback){
+module.exports = function(query,callback,loopCount){
 
 var pg = require('pg');
 var dbconfig = require('./dbconfig');
@@ -23,13 +23,13 @@ var conString = "postgres://postgres@localhost:5432/Attendance";
 				if(err){
 					console.log("Error occurred while getting connection!!!");
 					console.log(err);
-					callback(err);
+					callback(err,null,loopCount);
 				}
 
 				client.query(query,function(err,results){
 					console.log("Query executed!!!");
 					//done(client);
-					callback(err,results);
+					callback(err,results,loopCount);
 					client.end();
 				});
 

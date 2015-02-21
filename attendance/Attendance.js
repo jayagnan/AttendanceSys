@@ -480,7 +480,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 					alert(json);
 					var markatt = {};
 					markatt = JSON.parse(json);
-					var html = "<table><tr><th>EmployeeId</th><th>Employee Name</th><th>Department</th><th>Designation</th><th>Shift</th><th>Attendance</th></tr>";
+					var html = "<input type='hidden' id='attlist' value='"+json+"' /> <table><tr><th>EmployeeId</th><th>Emp Name</th><th>Department</th><th>Shift</th><th>Present</th><th>Absent</th><th>Leave</th></tr>";
 					
 					for(var i=0; i<markatt.length;i++){
 
@@ -488,10 +488,47 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 						var empname = markatt[i].empname;
 						var dept = markatt[i].department;
 						var designation = markatt[i].designation;
-						var shiftid = markatt[i].shiftid;
-						var attendance = markatt[i].attendance;
+						var shiftid = markatt[i].shiftid !== null ? markatt[i].shiftid : "Not Allocated";
+						var attendance = checkNull(markatt[i].attendance);
+						var leaveid = checkNull(markatt[i].leaveid);
+						if(leaveid && leaveid !== ""){
+							//var bgcolor = " style = 'background-color:steelblue;' ";
+							var bgcolor = " class=leave ";
+						}
 
-						html += "<tr><td>"+empid+"</td><td>"+empname+"</td><td>"+dept+"</td><td>"+designation+"</td><td>"+shiftid+"</td><td>"+attendance+"</td>     </tr>";
+						html += "<tr"+bgcolor+"><td>"+empid+"</td><td>"+empname+"</td><td>"+dept+"</td><td>"+shiftid+"</td>";
+
+						switch(attendance){
+
+							case "PRESENT" : html += "<td> <input type='radio' name='"+empid+"' value='PRESENT' checked /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='ABSENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='LEAVE'  /> </td> ";	break;
+							case "ABSENT" : html += "<td> <input type='radio' name='"+empid+"' value='PRESENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='ABSENT' checked /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='LEAVE'  /> </td> ";	break;
+							case "LEAVE" : html += "<td> <input type='radio' name='"+empid+"' value='PRESENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='ABSENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='LEAVE' checked /> </td> ";	break;
+							default : 		
+										if(leaveid && leaveid !== ""){
+											html += "<td> <input type='radio' name='"+empid+"' value='PRESENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='ABSENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='LEAVE' checked /> </td> ";	
+										} else{
+											html += "<td> <input type='radio' name='"+empid+"' value='PRESENT' checked /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='ABSENT'  /> </td> ";
+											 html += "<td> <input type='radio' name='"+empid+"' value='LEAVE'  /> </td> ";	
+
+
+
+										}	 
+											break;
+
+
+						}
+
+						html +=  "</tr>";
+					bgcolor = "";
 					}
 					html += "</table>";
 
@@ -506,8 +543,58 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 });
 
 
+$("#contents").on("click","#btnMarkAttendance", function(){
+
+	alert("JSON - inside mark attendance");
+	var json = $("#attlist").val();
+	var attList = JSON.parse(json);
+
+	console.log("Attlist ==> "+json);
+
+	var radioList = $("input[type='radio']:checked");
+
+	console.log(radioList[0].value);
+
+	for(var i=0; i<attList.length; i++){
+		
+		if(attList[i].empid === radioList[i].name){
+			attList[i].attendance = radioList[i].value;
+			attList[i].date = $("#dtAttendance").val();
+		}
+
+	}
+
+	var jsonStr = JSON.stringify(attList);
+
+	var url = "/attendance/attendance/MarkAttendance";
+	$.ajax({
+
+			type:"POST",
+			url:url,
+			data:jsonStr,
+			contentType:"",
+			dataType:"",
+			processdata:true,
+			success: function(json){
+				$("#divAttendance").html(json);
+			},
+			error:function(err){
+				console.log(err);
+				$("#divAttendance").html("Error Occured while adding employee!!!"+ err);
+			}
+	});
+
+
+
+});
+
 
 /************************ATTENDANCE*******************************************************/
+
+function checkNull(obj){
+
+	return obj === null ? "" : obj;
+}
 
 
 });

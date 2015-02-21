@@ -68,18 +68,37 @@ module.exports={
 							var att = JSON.parse(jsonStr);
 							attDS.getAttendanceByDate(att,function(err,results){
 								if(err){
+									console.log("Error :: "+JSON.stringify(err));
 									res.writeHead(200, {'content-type': 'text/plain'});
 									res.end("Unable to get attendance records!!! - "+err.detail);
 								}
-								if(results.rows){
-									res.end(JSON.stringify(results.rows));
-								}
-								else
-								{
-									res.end("");
+								else{
+									if(results.hasOwnProperty("rows")){
+										res.end(JSON.stringify(results.rows));
+									}
+									else
+									{
+										res.end("");
+									}
 								}
 							});
-						}					
+						},
+	markAttendance: function(res,jsonStr){
+						var attList = JSON.parse(jsonStr);
+						attDS.markAttendance(attList,function(err,results){
+
+							if(err){
+									console.log("Error :: "+JSON.stringify(err));
+									res.writeHead(200, {'content-type': 'text/plain'});
+									res.end("Unable to mark attendance !!! - "+err.detail);
+							} 
+							else{
+									res.end(JSON.stringify(results));
+							}
+
+						});
+
+					}					
 
 		
 }

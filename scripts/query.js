@@ -183,19 +183,19 @@ module.exports={
 
 	getAttendanceByEmpQry:function(att){
 		var qry = "SELECT departmentid, employeeid, employeename, attendance, date FROM attendance where employeeid='{employeeid}'";
-		qry.supplant({departmentid:att.DepartmentId, employeeid:att.EmployeeId, employeename:att.EmployeeName, attendance:att.Attendance, date:att.Today});
+		qry.supplant({departmentid:att.department, employeeid:att.empid, employeename:att.empname, attendance:att.attendance, date:att.date});
 		return qry;		
 	},
 
 	getAddAttendanceQry:function(att){
 		var qry = "INSERT INTO attendance(departmentid, employeeid, employeename, attendance, date) VALUES ('{departmentid}', '{employeeid}', '{employeename}', '{attendance}', '{date}')";
-		qry.supplant({departmentid:att.DepartmentId, employeeid:att.EmployeeId, employeename:att.EmployeeName, attendance:att.Attendance, date:att.Today});
+		qry = qry.supplant({departmentid:att.department, employeeid:att.empid, employeename:att.empname, attendance:att.attendance, date:att.date});
 		return qry;				
 	},
 
 	getUpdateAttendanceQry:function(att){
 		var qry = "UPDATE attendance SET departmentid='{departmentid}', employeeid='{employeeid}', employeename='{employeename}', attendance='{attendance}', date='{date}' WHERE employeeid = '{employeeid}' and date = '{date}'";
-		qry.supplant({departmentid:att.DepartmentId, employeeid:att.EmployeeId, employeename:att.EmployeeName, attendance:att.Attendance, date:att.Today});
+		qry = qry.supplant({departmentid:att.department, employeeid:att.empid, employeename:att.empname, attendance:att.attendance, date:att.date});
 		return qry;				
 	},
 
@@ -206,8 +206,8 @@ module.exports={
 	},
 
 	getAttendanceByDateQry:function(att){
-		var qry = "SELECT empid, empname, department, designation, shiftallocation.shiftid, attendance.attendance FROM employee left outer join shiftallocation on employee.empid = shiftallocation.employeeid and '{attDate}' >= fromdate and todate <= '{attDate}' left outer join attendance on employee.empid = attendance.employeeid and '{attDate}' = attendance.date";
-		
+		var qry = "SELECT empid, empname, department, designation, shiftallocation.shiftid, attendance.attendance, leaveid FROM employee left outer join shiftallocation on employee.empid = shiftallocation.employeeid and '{attDate}' >= fromdate and todate >= '{attDate}' left outer join attendance on employee.empid = attendance.employeeid and '{attDate}' = attendance.date";
+		qry += " left outer join leave on  employee.empid = leave.employeeid and '{attDate}' >= leave.fromdate and leave.todate >= '{attDate}'"
 		//constructing where query
 		var depqry = "";
 		if(att.DepartmentId && att.DepartmentId !== ""){
@@ -234,6 +234,11 @@ module.exports={
 
 		qry = qry.supplant({'attDate':att.Date});
 		return qry;		
+	},
+
+	getMarkAttendanceQry:function(attList){
+
+
 	}
 
 

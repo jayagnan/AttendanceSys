@@ -152,8 +152,8 @@ table td {
     background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
 }
 table tr.leave td {
-    background: #ff9d72;
-    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#FF9D72));
+    background: #037DF7;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6CB4F7), to(#CAE1F7));
     background: -moz-linear-gradient(top,  #f8f8f8,  #FF9D72);
 }
 table tr.even td {
