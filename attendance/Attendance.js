@@ -347,30 +347,36 @@ $("#contents").on("click","#btnGetDept",function(){
 
 	$("#contents").on("click","#btnGetReport",function(){
 
-		drawBarChart();
+		//drawBarChart();
 
-		/*
-		var url = "/attendance/attReport/";
+		alert("in get report");
+		var url = "/attendance/report/GETMONTHBYDATE";
 
-		var jsonStr = JSON.stringify(emp);
-		//alert(jsonStr);
+		var rep = {};
+		rep.month = $("slctMonth").val();
+		rep.departmentid = $("slctDepartment").val();
+
+		var jsonStr = JSON.stringify(rep);
+		alert(jsonStr);
 
 		$.ajax({
-				type:"PUT",
+				type:"POST",
 				url:url,
 				data:jsonStr,
 				contentType:"",
 				dataType:"",
 				processdata:true,
 				success: function(json){
-					$("#contents").html(json);
+					alert("response "+json);
+					var reportList = JSON.parse(json);
+					drawBarChart(reportList);
 				},
 				error:function(err){
 					console.log(err);
 					$("#contents").html("Error Occured while adding employee!!!"+ err);
 				}
 		});
-	*/
+	
 
 
 	});

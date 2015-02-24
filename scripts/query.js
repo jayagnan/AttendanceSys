@@ -240,8 +240,22 @@ module.exports={
 
 	/*********************REPORT QUERIES***************************************/
 
-	getMarkAttendanceQry:function(attList){
+	getAttReportByDateQry:function(report){
 
+		var qry = "SELECT count(employeeid), date, attendance FROM attendance";
+
+		var whereqry = "";
+		if(report.month && report.month !== ""){
+
+			whereqry += " where extract(month from date) = "+report.month;
+
+		}
+		if(report.departmentid && report.departmentid !== ""){
+			whereqry += " and departmentid = '"+report.departmentid+"' ";
+		}
+
+		qry += whereqry;
+		qry += " group by date, attendance order by date"
 
 	}
 
