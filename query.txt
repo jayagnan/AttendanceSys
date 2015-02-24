@@ -8,3 +8,5 @@ left outer join attendance on employee.empid = attendance.employeeid and current
 left outer join leave on  employee.empid = leave.employeeid and current_date >= leave.fromdate and leave.todate >= current_date 
 where employee.department = 'VicSSS' and shiftallocation.shiftid = 'S003';
 
+SELECT count(employeeid), date, attendance
+  FROM attendance where extract(month from date) =2 group by date, attendance order by date;
