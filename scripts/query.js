@@ -238,6 +238,8 @@ module.exports={
 		return qry;		
 	},
 
+	/*********************REPORT QUERIES***************************************/
+
 	getMarkAttendanceQry:function(attList){
 
 

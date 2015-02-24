@@ -455,7 +455,7 @@ $("#contents").on("click",".btnalloc",function(data){
 
 $("#contents").on("click","#btnGetAttendance",function(data){
 
-	alert("In get attendance");
+//	alert("In get attendance");
 
 		
 		var url = "/attendance/attendance/GETBYDATE";
@@ -465,7 +465,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 		att.Date = $("#dtAttendance").val();
 		
 		var jsonStr = JSON.stringify(att);
-		alert(jsonStr);
+	//	alert(jsonStr);
 
 		$.ajax({
 
@@ -477,7 +477,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
+		//			alert(json);
 					var markatt = {};
 					markatt = JSON.parse(json);
 					var html = "<input type='hidden' id='attlist' value='"+json+"' /> <table><tr><th>EmployeeId</th><th>Emp Name</th><th>Department</th><th>Shift</th><th>Present</th><th>Absent</th><th>Leave</th></tr>";
@@ -545,7 +545,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 
 $("#contents").on("click","#btnMarkAttendance", function(){
 
-	alert("JSON - inside mark attendance");
+//	alert("JSON - inside mark attendance");
 	var json = $("#attlist").val();
 	var attList = JSON.parse(json);
 
