@@ -5,6 +5,7 @@ module.exports={
 
 		getAttReportByDate:function(report,callback){
 							var qry = query.getAttReportByDateQry(report);
+							console.log("Query "+qry);
 							var weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 							executeQuery(qry,function(err,results){
 								if(err){
@@ -12,7 +13,7 @@ module.exports={
 									callback(err,results);
 
 								} else {
-
+									console.log("Data from database =>"+JSON.stringify(results.rows));
 									attList = results.rows;
 									attReportList = [];
 									var dayCount = 0;
@@ -29,6 +30,9 @@ module.exports={
 										} else{
 											dayCount = attList[i].day;
 											var attReport = {};
+											attReport.NoOfEmployeesPresent = 0;
+											attReport.NoOfEmployeesAbsent = 0;
+											attReport.NoOfEmployeesLeave = 0;
 
 											switch(attList[i].attendance){
 												case "PRESENT": attReport.NoOfEmployeesPresent = attList[i].count; break;
@@ -36,7 +40,8 @@ module.exports={
 												case "LEAVE": attReport.NoOfEmployeesLeave = attList[i].count; break;
 											}
 
-											attReport.date = attList[i].date;
+											console.log("UTC string => "+(new Date(attList[i].date)).toUTCString());
+											attReport.date = (new Date(attList[i].date)+1);
 											attReport.dayOfDate = attList[i].day;
 											attReport.weekday = weekdays[(new Date(attList[i].date)).getDay()];
 											attReportList.push(attReport);

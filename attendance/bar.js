@@ -1,4 +1,4 @@
-function drawBarChart(){
+function drawBarChart(data){
 
 			var width = 600, height = 600;
 			var barWidth = 25;
@@ -7,7 +7,7 @@ function drawBarChart(){
 					    width = width - margin.left - margin.right,
 					    height = height - margin.top - margin.bottom;
 
-
+			d3.select("svg").remove();		    
 			var canvas = d3.select("#contents")
 							.append("svg")
 							.attr("class","chart")
@@ -24,11 +24,11 @@ function drawBarChart(){
     						.scale(yScale)
     						.orient("left");				
 
-			d3.json("reportall.json",function(data){
+			//d3.json("reportall.json",function(data){
 
 			var xScale = d3.scale.ordinal()
 							.rangeRoundBands([0,data.length*barWidth],.1)
-							.domain(data.map(function(d){return d.date;}))	
+							.domain(data.map(function(d){return d.dayOfDate;}))	
 
 			var xAxis = d3.svg.axis()
     						.scale(xScale)
@@ -52,10 +52,11 @@ function drawBarChart(){
 								.append("text")
 								    .attr("transform", "rotate(-90)")
 								    .attr("y", 6)
-								    .attr("dy", ".71em")
+								    .attr("dy", "-3.71em")
 								    .style("text-anchor", "end")
 								    .text("Num of Employees")
 								    .style("fill","steelblue")
+								    .style("font","11px sans-serif");
 
 						canvas.append("g")
     							.attr("class", "x axis")
@@ -67,7 +68,8 @@ function drawBarChart(){
 							   		.attr("x",xScale.rangeBand())
 							   		.attr("dy", "2.71em")
 								    .text("Day in Month")
-								    .style("fill","steelblue");
+								    .style("fill","steelblue")
+								    .style("font","11px sans-serif");
 							    			
 				console.log("Yscale max "+yScale(Number(data[0].NoOfEmployeesPresent)+Number(data[0].NoOfEmployeesAbsent)+Number(data[0].NoOfEmployeesLeave)));
 				
@@ -94,7 +96,7 @@ function drawBarChart(){
 						bar.append("text")
 							.attr("x", barWidth/2 - 2)
 							.attr("y",function(d){return /*chartHeight-*/yScale(Number(d.NoOfEmployeesPresent)+Number(d.NoOfEmployeesAbsent)) + 15 ;} )
-							.text(function(d){return d.NoOfEmployeesAbsent;});		
+							.text(function(d){return d.NoOfEmployeesAbsent === 0 ? "" : d.NoOfEmployeesAbsent ;});		
 
 						bar.append("rect")
 						//	.attr("x",barWidth*2)
@@ -106,8 +108,8 @@ function drawBarChart(){
 						bar.append("text")
 							.attr("x",barWidth/2 - 2)
 							.attr("y",function(d){return /*chartHeight-*/yScale(Number(d.NoOfEmployeesPresent)+Number(d.NoOfEmployeesAbsent)+Number(d.NoOfEmployeesLeave)) + 15 ;} )
-							.text(function(d){return d.NoOfEmployeesLeave;});		
+							.text(function(d){return d.NoOfEmployeesLeave === 0 ? "" : d.NoOfEmployeesLeave ;});		
 
 
-			});
+	//		});
 }

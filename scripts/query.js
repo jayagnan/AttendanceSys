@@ -242,7 +242,7 @@ module.exports={
 
 	getAttReportByDateQry:function(report){
 
-		var qry = "SELECT count(employeeid), date, attendance FROM attendance";
+		var qry = "SELECT count(employeeid), date  as date,  extract(day from date) as day, attendance FROM attendance";
 
 		var whereqry = "";
 		if(report.month && report.month !== ""){
@@ -256,6 +256,8 @@ module.exports={
 
 		qry += whereqry;
 		qry += " group by date, attendance order by date"
+
+		return qry;
 
 	}
 

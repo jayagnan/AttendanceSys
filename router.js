@@ -145,7 +145,7 @@ function route(pathname,request,response,data){
 	/*********************REPORT***************************/
 
 	if(pathname.indexOf('/attendance/report/') !== -1){
-
+		
 		if(pathname === '/attendance/report/GETMONTHBYDATE' ){
 				console.log("Router ==> "+data);
 				report.getAttReportByDate(response,data);

@@ -353,8 +353,8 @@ $("#contents").on("click","#btnGetDept",function(){
 		var url = "/attendance/report/GETMONTHBYDATE";
 
 		var rep = {};
-		rep.month = $("slctMonth").val();
-		rep.departmentid = $("slctDepartment").val();
+		rep.month = $("#slctMonth").val();
+		rep.departmentid = $("#slctDepartment").val();
 
 		var jsonStr = JSON.stringify(rep);
 		alert(jsonStr);
@@ -373,7 +373,7 @@ $("#contents").on("click","#btnGetDept",function(){
 				},
 				error:function(err){
 					console.log(err);
-					$("#contents").html("Error Occured while adding employee!!!"+ err);
+					$("#contents").html("Error Occured while getting  report data!!!"+ err);
 				}
 		});
 	
@@ -471,7 +471,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 		att.Date = $("#dtAttendance").val();
 		
 		var jsonStr = JSON.stringify(att);
-	//	alert(jsonStr);
+		alert(jsonStr);
 
 		$.ajax({
 
