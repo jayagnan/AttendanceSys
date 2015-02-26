@@ -263,7 +263,15 @@ module.exports={
 
 	getAttReportByMonthQry:function(report){
 
-		var qry = "select count(employeeid) as NoOfEmployees, attendance, extract(month from date) as monthnum from attendance where extract(month from date) = {monthnum} and extract(year from date) = {year} group by extract(month from date), attendance order by attendance";
+		var qry = "select count(employeeid) as NoOfEmployees, attendance, extract(month from date) as monthnum from attendance where extract(month from date) = {monthnum} and extract(year from date) = {year}";
+		var whereqry = "";
+		if(report.departmentid && report.departmentid !== ""){
+			whereqry += " and departmentid = '"+report.departmentid+"' ";
+		}
+
+		qry += whereqry;
+		qry += " group by extract(month from date), attendance order by attendance";
+
 		qry = qry.supplant({monthnum:report.month,year:report.year});
 		return qry;
 	}
