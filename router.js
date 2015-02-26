@@ -150,7 +150,13 @@ function route(pathname,request,response,data){
 				console.log("Router ==> "+data);
 				report.getAttReportByDate(response,data);
 		} 
+	
+		if(pathname === '/attendance/report/GETMONTHLY' ){
+				console.log("Router ==> "+data);
+				report.getAttReportByMonth(response,data);
+		} 
 	}
+
 
 
 }

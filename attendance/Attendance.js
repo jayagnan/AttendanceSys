@@ -350,32 +350,68 @@ $("#contents").on("click","#btnGetDept",function(){
 		//drawBarChart();
 
 		alert("in get report");
-		var url = "/attendance/report/GETMONTHBYDATE";
 
 		var rep = {};
-		rep.month = $("#slctMonth").val();
+		var val = $("#slctMonth").val().split(",");
+		rep.month = val[0];
+		rep.year = val[1];
 		rep.departmentid = $("#slctDepartment").val();
+		rep.reporttype = $("#slctReport").val();
 
-		var jsonStr = JSON.stringify(rep);
-		alert(jsonStr);
+		if(rep.reporttype === 'Daywise'){
 
-		$.ajax({
-				type:"POST",
-				url:url,
-				data:jsonStr,
-				contentType:"",
-				dataType:"",
-				processdata:true,
-				success: function(json){
-					alert("response "+json);
-					var reportList = JSON.parse(json);
-					drawBarChart(reportList);
-				},
-				error:function(err){
-					console.log(err);
-					$("#contents").html("Error Occured while getting  report data!!!"+ err);
-				}
-		});
+			var url = "/attendance/report/GETMONTHBYDATE";
+
+
+			var jsonStr = JSON.stringify(rep);
+			alert(jsonStr);
+
+			$.ajax({
+					type:"POST",
+					url:url,
+					data:jsonStr,
+					contentType:"",
+					dataType:"",
+					processdata:true,
+					success: function(json){
+						alert("response "+json);
+						var reportList = JSON.parse(json);
+						drawBarChart(reportList);
+					},
+					error:function(err){
+						console.log(err);
+						$("#contents").html("Error Occured while getting  report data!!!"+ err);
+					}
+			});
+
+	} else if(rep.reporttype === 'Monthly'){
+
+			var url = "/attendance/report/GETMONTHLY";
+
+			var jsonStr = JSON.stringify(rep);
+			alert(jsonStr + url);
+
+			$.ajax({
+					type:"POST",
+					url:url,
+					data:jsonStr,
+					contentType:"",
+					dataType:"",
+					processdata:true,
+					success: function(json){
+						alert("response "+json);
+						var reportList = JSON.parse(json);
+						drawPieChart(reportList);
+					},
+					error:function(err){
+						console.log(err);
+						$("#contents").html("Error Occured while getting  report data!!!"+ err);
+					}
+			});
+
+
+
+	}
 	
 
 

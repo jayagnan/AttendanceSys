@@ -52,5 +52,40 @@ module.exports={
 								}
 							callback(null,attReportList);
 							});
+						},
+
+		getAttReportByMonth : function(rep,callback){
+
+			var qry = query.getAttReportByMonthQry(rep);
+			var months = ["","January","February","March","April","May","June","July","August","September","October","November","December"]
+
+			console.log("Query "+qry);
+			executeQuery(qry,function(err,results){
+
+				if(err){
+						callback(err,results);
+
+				} else {
+						
+						console.log("Data from database =>"+JSON.stringify(results.rows));
+						var attReportList = [];
+						
+
+						var attList = results.rows;
+						for(var i=0; i<attList.length; i++){
+							var report = {};
+							report.NoOfEmployees = attList[i].noofemployees;
+							report.MonthNum = attList[i].monthnum;
+							report.Type = attList[i].attendance;
+							report.Month = months[attList[i].monthnum];
+							report.Year = rep.Year;
+							attReportList.push(report);
+
 						}
+
+						callback(null,attReportList);
+				}
+			});
+
+		}
 }

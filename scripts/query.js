@@ -242,7 +242,7 @@ module.exports={
 
 	getAttReportByDateQry:function(report){
 
-		var qry = "SELECT count(employeeid), date  as date,  extract(day from date) as day, attendance FROM attendance";
+		var qry = "SELECT count(employeeid), date as date,  extract(day from date) as day, attendance FROM attendance";
 
 		var whereqry = "";
 		if(report.month && report.month !== ""){
@@ -259,6 +259,13 @@ module.exports={
 
 		return qry;
 
+	},
+
+	getAttReportByMonthQry:function(report){
+
+		var qry = "select count(employeeid) as NoOfEmployees, attendance, extract(month from date) as monthnum from attendance where extract(month from date) = {monthnum} and extract(year from date) = {year} group by extract(month from date), attendance order by attendance";
+		qry = qry.supplant({monthnum:report.month,year:report.year});
+		return qry;
 	}
 
 

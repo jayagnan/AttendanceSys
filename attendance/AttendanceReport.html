@@ -2,6 +2,7 @@
 	<head>
 		<script src = "d3.v3.min.js"></script>
 		<script src = "bar.js"></script>
+		<script src = "piechart.js"></script>
 		<style>
 
 			.chart rect {
@@ -35,6 +36,11 @@
 			  shape-rendering: crispEdges;
 			}
 
+			.arc text{
+				font : 20px sans-serif;
+				fill: white;
+			}
+
 		</style>
 	</head>
 	<body>
@@ -52,8 +58,8 @@
             	
             	<label class="lblAttReport" for="Month"> Month: </label>
             	<select id="slctMonth" name ="slctMonth" class="slctAttendance" >
-            		<option value="1" >Jan 2015</option>
-            		<option value="2" >Feb 2015</option>
+            		<option value="1,2015" >Jan 2015</option>
+            		<option value="2,2015" >Feb 2015</option>
             	</select>
 
             	<span style="padding:10px;"></span>
