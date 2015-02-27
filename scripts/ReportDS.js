@@ -69,7 +69,6 @@ module.exports={
 						
 						console.log("Data from database =>"+JSON.stringify(results.rows));
 						var attReportList = [];
-						
 
 						var attList = results.rows;
 						for(var i=0; i<attList.length; i++){
@@ -78,7 +77,7 @@ module.exports={
 							report.MonthNum = attList[i].monthnum;
 							report.Type = attList[i].attendance;
 							report.Month = months[attList[i].monthnum];
-							report.Year = rep.Year;
+							report.Year = rep.year;
 							attReportList.push(report);
 
 						}
@@ -86,6 +85,46 @@ module.exports={
 						callback(null,attReportList);
 				}
 			});
+
+		},
+		getReportByEmployee : function(rep,callback){
+
+			var qry = query.getAttReportByEmployeeQry(rep);
+			console.log("Qry => "+qry);
+			var months = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+			var weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+			executeQuery(qry,function(err,results){
+
+				if(err){
+					console.log("Got back err from db "+results);
+						callback(null,[]);
+				} else {
+
+				console.log("Got back info from db "+results.rows);
+					var attList = results.rows;
+					var attReportList = [];
+
+					for(var i=0; i<attList.length; i++){
+							var report = {};
+							report.Day = attList[i].day;
+							report.DOW = attList[i].dow;
+							report.WeekDay = weekdays[attList[i].dow];
+							report.MonthNum = rep.month;
+							report.Month = months[rep.month];
+							report.Year = rep.year;
+							report.Type = attList[i].attendance;
+							if(report.Type === null){report.Type = "NOINFO";}
+							attReportList.push(report);
+
+					}
+
+					callback(null,attReportList);
+
+				}
+			});
+
+
 
 		}
 }

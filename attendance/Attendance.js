@@ -357,8 +357,35 @@ $("#contents").on("click","#btnGetDept",function(){
 		rep.year = val[1];
 		rep.departmentid = $("#slctDepartment").val();
 		rep.reporttype = $("#slctReport").val();
+		rep.empid = $("#slctEmployee").val();
 
-		if(rep.reporttype === 'Daywise'){
+		if(rep.empid && rep.empid !== ""){
+
+			var url = "/attendance/report/GETEMPATTMONTH";
+
+
+			var jsonStr = JSON.stringify(rep);
+			alert(jsonStr);
+
+			$.ajax({
+					type:"POST",
+					url:url,
+					data:jsonStr,
+					contentType:"",
+					dataType:"",
+					processdata:true,
+					success: function(json){
+						alert("response "+json);
+						var reportList = JSON.parse(json);
+						drawCal(reportList);
+					},
+					error:function(err){
+						console.log(err);
+						$("#contents").html("Error Occured while getting  report data!!!"+ err);
+					}
+			});
+		}
+		else if(rep.reporttype === 'Daywise'){
 
 			var url = "/attendance/report/GETMONTHBYDATE";
 
@@ -408,9 +435,6 @@ $("#contents").on("click","#btnGetDept",function(){
 						$("#contents").html("Error Occured while getting  report data!!!"+ err);
 					}
 			});
-
-
-
 	}
 	
 

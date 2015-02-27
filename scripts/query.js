@@ -274,6 +274,21 @@ module.exports={
 
 		qry = qry.supplant({monthnum:report.month,year:report.year});
 		return qry;
+	},
+	getAttReportByEmployeeQry:function(report){
+
+		var qry = "select generate_series as dat,extract(day from generate_series) as day,extract(dow from generate_series) as dow, attendance from generate_series ('{firstday}'::date,'{lastday}'::date,'1 day') left outer join attendance on  generate_series = attendance.date and employeeid = '{empid}'";
+		var month = +report.month -1;
+		var year = report.year;
+		var firstday = new Date(year,month,1);
+		var fd = firstday.getFullYear() +"-"+ (Number(firstday.getMonth()) +1) + "-" + firstday.getDate();
+		console.log("Firstday ==> "+firstday+"-"+fd);
+		var lastday = new Date(year, +month + 1,0);
+		var ld = lastday.getFullYear() +"-"+  (Number(lastday.getMonth()) + 1) + "-" + lastday.getDate();
+		console.log("lastday ==> "+lastday+"-"+ld);
+
+		qry = qry.supplant({firstday:fd,lastday:ld,empid:report.empid});
+		return qry;
 	}
 
 

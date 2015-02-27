@@ -3,6 +3,8 @@
 		<script src = "d3.v3.min.js"></script>
 		<script src = "bar.js"></script>
 		<script src = "piechart.js"></script>
+		<script src = "cal.js"></script>
+		<script src = "calLayout.js"></script>
 		<style>
 
 			.chart rect {
@@ -40,6 +42,26 @@
 				font : 20px sans-serif;
 				fill: white;
 			}
+			.PRESENT  rect {
+			  fill: yellowgreen;
+			}
+			.ABSENT  rect {
+			  fill: #FF0000;
+			}
+			.LEAVE  rect {
+			  fill: #FF9900;
+			}
+			.BLANK  rect {
+			  fill: #CCCCCC;
+			}
+			.NOINFO  rect {
+			  fill: #82AFF9;
+			}
+			.PRESENT,.ABSENT,.LEAVE,.BLANK,.NOINFO text{
+				fill:white;
+				font: 25px sans-serif;
+			  	text-anchor: middle;
+			}
 
 		</style>
 	</head>
@@ -74,7 +96,8 @@
             	<span style="padding:10px;"></span>
             	<label class="lblAttReport" for="Employee"> Employee: </label>
             	<select id="slctEmployee" name ="slctEmployee" class="slctAttendance" >
-            		<option value="All" >All</option>
+            		<option value="" >All</option>
+            		<option value="18096" >18096</option>
             	</select>
 
             

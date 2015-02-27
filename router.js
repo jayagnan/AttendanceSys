@@ -155,6 +155,12 @@ function route(pathname,request,response,data){
 				console.log("Router ==> "+data);
 				report.getAttReportByMonth(response,data);
 		} 
+
+		if(pathname === '/attendance/report/GETEMPATTMONTH' ){
+			console.log("Router ==> "+data);
+			report.getReportByEmployee(response,data);
+		} 
+
 	}
 
 
