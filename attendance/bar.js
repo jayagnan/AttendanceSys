@@ -2,7 +2,7 @@ function drawBarChart(data){
 
 			var width = 600, height = 600;
 			var barWidth = 25;
-			var chartWidth = 800, chartHeight = 500;
+			var chartWidth = 600, chartHeight = 400;
 			var margin = {top: 20, right: 30, bottom: 30, left: 60},
 					    width = width - margin.left - margin.right,
 					    height = height - margin.top - margin.bottom;
@@ -14,7 +14,7 @@ function drawBarChart(data){
 							.attr("width", width + margin.left + margin.right)
 						    .attr("height", height + margin.top + margin.bottom)
 						  	.append("g")
-						    	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+						    	.attr("transform", "translate(" + margin.left + "," + (Number(margin.top) + 75) + ")");
 
 							
 			var yScale = d3.scale.linear()
@@ -110,6 +110,44 @@ function drawBarChart(data){
 							.attr("y",function(d){return /*chartHeight-*/yScale(Number(d.NoOfEmployeesPresent)+Number(d.NoOfEmployeesAbsent)+Number(d.NoOfEmployeesLeave)) + 15 ;} )
 							.text(function(d){return d.NoOfEmployeesLeave === 0 ? "" : d.NoOfEmployeesLeave ;});		
 
+
+
+						var legend =d3.select("svg").append("g")
+										.attr("transform","translate(300,45)");
+
+						var prelegend = legend.append("g").attr("class","prelegend").attr("transform","translate(0,0)");
+						var abslegend = legend.append("g").attr("class","abslegend").attr("transform","translate(100,0)");
+						var lvelegend = legend.append("g").attr("class","lvelegend").attr("transform","translate(200,0)");
+
+						prelegend.append("rect")
+								.attr("width",40)
+								.attr("height",30)
+								.attr("fill","#32CD32");
+						prelegend.append("text")
+								.attr("x",42)
+								.attr("y",15)
+								.attr("fill","steelblue")
+								.text("- Present");
+
+						abslegend.append("rect")
+								.attr("width",40)
+								.attr("height",30)
+								.attr("fill","#FF0000");
+						abslegend.append("text")
+								.attr("x",42)
+								.attr("y",15)
+								.attr("fill","steelblue")
+								.text("- Absent");
+
+						lvelegend.append("rect")
+								.attr("width",40)
+								.attr("height",30)
+								.attr("fill","#FF9900");
+						lvelegend.append("text")
+								.attr("x",42)
+								.attr("y",15)
+								.attr("fill","steelblue")
+								.text("- Leave");
 
 	//		});
 }

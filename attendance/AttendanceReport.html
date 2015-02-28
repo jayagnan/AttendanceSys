@@ -51,17 +51,33 @@
 			.LEAVE  rect {
 			  fill: #FF9900;
 			}
+			.prelegend  rect {
+			  fill: steelblue;
+			}
+			.abslegend  rect {
+			  fill: #FF0000;
+			}
+			.lvelegend  rect {
+			  fill: #FF9900;
+			}
 			.BLANK  rect {
 			  fill: #CCCCCC;
 			}
 			.NOINFO  rect {
 			  fill: #82AFF9;
 			}
+			.prelegend text,.abslegend text,.lvelegend text{
+				fill:steelblue;
+				font: 11px sans-serif;
+			  	text-anchor: start;
+			}
 			.PRESENT,.ABSENT,.LEAVE,.BLANK,.NOINFO text{
 				fill:white;
 				font: 25px sans-serif;
 			  	text-anchor: middle;
 			}
+
+			
 
 		</style>
 	</head>
@@ -97,7 +113,7 @@
             	<label class="lblAttReport" for="Employee"> Employee: </label>
             	<select id="slctEmployee" name ="slctEmployee" class="slctAttendance" >
             		<option value="" >All</option>
-            		<option value="18096" >18096</option>
+            		<option value="18096" selected>18096</option>
             	</select>
 
             
