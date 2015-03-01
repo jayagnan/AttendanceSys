@@ -124,7 +124,19 @@ module.exports={
 				}
 			});
 
+		},
+		getUniqMonthYear : function(callback){
 
+			var qry = query.getUniqMonthAndYearQry();
+
+			executeQuery(qry,function(err,results){
+				if(err){
+					console.log("Got back err from db "+results);
+						callback(null,[]);
+				} else {
+						callback(null,results.rows)
+				}
+			});		
 
 		}
 }

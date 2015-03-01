@@ -33,6 +33,15 @@ module.exports={
 
 							});
 						},
+		getEmployeesByDept : function(emp,callback){
+
+					var qry = query.getEmployeeByDeptQry(emp);
+					console.log("Query ::"+qry);
+					executeQuery(qry,function(err,results){
+						callback(err,results);
+					});
+				},
+				
 		addEmployee : function(emp,callback){
 		
 							var addQry = query.getAddEmployeeQry(emp);

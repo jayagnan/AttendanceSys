@@ -41,7 +41,20 @@ module.exports={
 					qry = qry.supplant({employeeid:emp.EmployeeId});
 					return qry;
 				},
+	getEmployeeByDeptQry:function(emp){
+				var qry= "";
+				console.log("Employee string "+emp);
+				//var emp = JSON.parse(emp);
 
+				if(emp.DepartmentId && emp.DepartmentId!==""){
+				 qry="select * from employee where department='{departmentid}'";
+				}else{
+					qry="select * from employee where department='{departmentid}'";
+				}
+					//console.log("Employee Id inside query ::: ===> "+emp.EmployeeId);
+					qry = qry.supplant({departmentid:emp.DepartmentId});
+					return qry;
+				},
 	//DEPARTMENT TABLE QUERIES
 
 	getAllDepartmentsQry: function(){
@@ -289,6 +302,12 @@ module.exports={
 
 		qry = qry.supplant({firstday:fd,lastday:ld,empid:report.empid});
 		return qry;
+	},
+	getUniqMonthAndYearQry:function(){
+
+		var qry = "SELECT distinct extract(month from date) as month ,  extract (year from date) as year FROM attendance order by extract(month from date) ,  extract (year from date);";
+		return qry;
+
 	}
 
 

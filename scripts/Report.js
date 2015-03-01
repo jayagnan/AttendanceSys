@@ -38,6 +38,20 @@ module.exports={
 								res.end(JSON.stringify(results));
 							});
 						},
+
+	getUniqMonthYear : function(res){
+
+							reportDS.getUniqMonthYear(function(err,results){
+								if(err){
+									res.writeHead(200, {'content-type': 'text/plain'});
+									res.end("Unable to get report info!!! - "+err.detail);
+								}
+								console.log("=>Got report information from DB!!!"+JSON.stringify(results));
+								res.end(JSON.stringify(results));
+							});
+
+
+						},
 						
 	addEmployee : function(res,jsonStr,callback){
 						var employee = JSON.parse(jsonStr);

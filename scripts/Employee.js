@@ -25,6 +25,18 @@ module.exports={
 								res.end(JSON.stringify(results.rows));
 							});
 						},
+	getEmployeesByDept: function(res,jsonStr){
+		console.log("JSON STRING =>"+jsonStr);
+							var employee = JSON.parse(jsonStr);
+							empDs.getEmployeesByDept(employee,function(err,results){
+								if(err){
+									res.writeHead(200, {'content-type': 'text/plain'});
+									res.end("Unable to get employee records!!! - "+err.detail);
+								}
+								console.log("=>Got employee information from DB!!!"+JSON.stringify(results.rows));
+								res.end(JSON.stringify(results.rows));
+							});
+						},
 	addEmployee : function(res,jsonStr,callback){
 						var employee = JSON.parse(jsonStr);
 						empDs.addEmployee(employee,function(err,results){

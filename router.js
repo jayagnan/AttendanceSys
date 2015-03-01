@@ -43,7 +43,9 @@ function route(pathname,request,response,data){
 		if(request.method === 'POST'){
 			if(pathname === '/attendance/employee/GET' ){
 				employee.getEmployeeById(response,data);
-			}else{
+			}else if(pathname === '/attendance/employee/GETEMPBYDEPT') {
+				employee.getEmployeesByDept(response,data);
+			}else {
 				employee.updateEmployee(response,data);
 			}
 		}
@@ -66,7 +68,7 @@ function route(pathname,request,response,data){
 				department.getAllDepartments(response);
 			}
 			else{				
-				department.getDepartmentById(response,data);
+				department.getAllDepartments(response);
 			}
 		}
 
@@ -159,6 +161,10 @@ function route(pathname,request,response,data){
 		if(pathname === '/attendance/report/GETEMPATTMONTH' ){
 			console.log("Router ==> "+data);
 			report.getReportByEmployee(response,data);
+		} 
+		if(pathname === '/attendance/report/GETUNIQMONTHYEAR' ){
+			console.log("Router ==> "+data);
+			report.getUniqMonthYear(response);
 		} 
 
 	}

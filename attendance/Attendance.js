@@ -131,7 +131,15 @@ $("#hrefAttendanceReport").click(function(){
 
 			if(statusTxt == "success"){
 				//alert("External content loaded successfully");
-				//alert(responseTxt);
+				alert("Loaded report");
+				getDepartments(function(jsonStr){
+					alert(jsonStr);
+					populateDept("slctDepartment",jsonStr);
+				});
+				getUniqMonthYear(function(jsonStr){
+					alert(jsonStr);
+					populateMonths("slctMonth",jsonStr);
+				});
 			}
 			if(statusTxt == "error"){
 				alert("Error :" + xhr.status + ": " + xhr.statusText);
@@ -141,6 +149,123 @@ $("#hrefAttendanceReport").click(function(){
 		});
 
 	});
+
+	$("#contents").on("click","#btnGetEmployees",function(){
+
+		var emp = {};
+		emp.DepartmentId = $("#slctDepartment").val();
+
+		//var json = JSON.stringify(emp);
+		getEmpByDept(emp,function(jsonStr){
+			alert(jsonStr);
+			populateEmp("slctEmployee",jsonStr);
+		});
+	});
+
+	function getDepartments(callback){
+
+		var url = "/attendance/department/";
+				$.ajax({
+
+				type:"GET",
+				url:url,
+				data:"",
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					console.log(json);
+					callback(json);
+				},
+				error:function(err){
+					console.log("Error Occured while getting dept info!!!");
+					//$("#contents").html("Error Occured while getting dept info!!!"+ err);
+				}
+		});
+	}
+
+	function populateDept(id,jsonstr){
+
+		var depts = JSON.parse(jsonstr);
+
+     $('#myDropDown').append(option);
+		for(var i=0; i<depts.length; i++){
+			var option = $('<option />');
+    	 	option.attr('value', depts[i].departmentid).text(depts[i].departmentname);
+			$("#"+id).append(option);
+		}
+	}
+
+	function getEmpByDept(emp,callback){
+
+		var jsonStr = JSON.stringify(emp);
+		alert(jsonStr);
+		var url = "/attendance/employee/GETEMPBYDEPT";
+				$.ajax({
+
+				type:"POST",
+				url:url,
+				data:jsonStr,
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					alert(json);
+					callback(json);
+				},
+				error:function(err){
+					console.log("Error Occured while getting dept info!!!");
+					//$("#contents").html("Error Occured while getting dept info!!!"+ err);
+				}
+		});
+	}
+
+	function populateEmp(id,jsonstr){
+
+		var emp = JSON.parse(jsonstr);
+		for(var i=0; i<emp.length; i++){
+			var option = $('<option />');
+    	 	option.attr('value', emp[i].empid).text(emp[i].empname);
+			$("#"+id).append(option);
+		}
+
+	}
+
+
+	function getUniqMonthYear(callback){
+
+		var url = "/attendance/report/GETUNIQMONTHYEAR";
+				$.ajax({
+
+				type:"GET",
+				url:url,
+				data:"",
+				contentType:"",
+				dataType:"",
+				processdata:true,
+				success: function(json){
+					console.log(json);
+					callback(json);
+				},
+				error:function(err){
+					console.log("Error Occured while getting dept info!!!");
+					//$("#contents").html("Error Occured while getting dept info!!!"+ err);
+				}
+		});
+	}
+
+	function populateMonths(id,jsonstr){
+		var monthList = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+
+		var months = JSON.parse(jsonstr);
+		for(var i=0; i<months.length; i++){
+			var option = $('<option />');
+    	 	option.attr('value', months[i].month + ","+months[i].year).text(monthList[months[i].month] + " "+months[i].year);
+			$("#"+id).append(option);
+
+		}
+	}
+
 
 	$("#hrefListProjectDetails").click(function(){
 
