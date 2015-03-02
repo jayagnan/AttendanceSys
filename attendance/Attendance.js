@@ -20,6 +20,11 @@ $(document).ready(function(){
 				if(statusTxt == "success"){
 
 					$("#dtAttendance").val(today);
+					getDepartments(function(jsonStr){
+						alert(jsonStr);
+						populateDept("slctDepartment",jsonStr);
+					});
+
 								//alert("External content loaded successfully");
 								//alert(responseTxt);
 				}
@@ -85,9 +90,6 @@ $(document).ready(function(){
 			}
 
 		});
-
-
-
 	});
 
 	$("#hrefAddShift").click(function(){
@@ -114,6 +116,10 @@ $(document).ready(function(){
 			if(statusTxt == "success"){
 				//alert("External content loaded successfully");
 				//alert(responseTxt);
+				getDepartments(function(jsonStr){
+					alert(jsonStr);
+					populateDept("slctDepartment",jsonStr);
+				});
 			}
 			if(statusTxt == "error"){
 				alert("Error :" + xhr.status + ": " + xhr.statusText);
@@ -223,8 +229,12 @@ $("#hrefAttendanceReport").click(function(){
 	function populateEmp(id,jsonstr){
 
 		var emp = JSON.parse(jsonstr);
+		
+		var option = $('<option />');
+    	 	option.attr('value', "").text("All");
+    	 $("#"+id).empty().append(option);
 		for(var i=0; i<emp.length; i++){
-			var option = $('<option />');
+		   var option = $('<option />');
     	 	option.attr('value', emp[i].empid).text(emp[i].empname);
 			$("#"+id).append(option);
 		}
@@ -255,7 +265,7 @@ $("#hrefAttendanceReport").click(function(){
 	}
 
 	function populateMonths(id,jsonstr){
-		var monthList = ["","January","February","March","April","May","June","July","August","September","October","November","December"];
+		var monthList = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 		var months = JSON.parse(jsonstr);
 		for(var i=0; i<months.length; i++){

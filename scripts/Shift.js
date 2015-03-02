@@ -7,10 +7,10 @@ module.exports={
 							shtDs.getAllShifts(function(err,results){
 								if(err){
 									console.log(err);
-									res.write("Unable to get all shift!!!");
+									res.end("Unable to get all shift!!!");
 								}
 								console.log("=>Got shift information from DB!!!"+JSON.stringify(results.rows));
-								res.write(JSON.stringify(results.rows));
+								res.end(JSON.stringify(results.rows));
 							});
 						},
 	getShiftById : function(res,jsonStr){

@@ -47,9 +47,9 @@ module.exports={
 				//var emp = JSON.parse(emp);
 
 				if(emp.DepartmentId && emp.DepartmentId!==""){
-				 qry="select * from employee where department='{departmentid}'";
+				 qry="select * from employee where department='{departmentid}' order by empid";
 				}else{
-					qry="select * from employee where department='{departmentid}'";
+					qry="select * from employee order by empid";
 				}
 					//console.log("Employee Id inside query ::: ===> "+emp.EmployeeId);
 					qry = qry.supplant({departmentid:emp.DepartmentId});
