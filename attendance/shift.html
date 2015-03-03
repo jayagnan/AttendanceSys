@@ -2,17 +2,23 @@
 <head></head>
 <body bgcolor="#a9a9a9">
 
-<div id="UpdateLeave">
+<div id="Shift">
 
-    <form id="Leave" name="Leave">
-        <div id="titleUpdateLeave">Shift</div>
-        <fieldset id="fsUpdateLeave">
-            <p> <label class="lblUpdateLeave" for="ShiftId"> Shift Id </label><input type="text" class="txtUpdateLeave"  id ="txtShiftId"  name="txtShiftId"></p>
-            <p><label class="lblUpdateLeave" for="EmployeeId">Employee Id</label><input type ="text"class="txtUpdateLeave"  id="txtEmployeeId"      name="txtEmployeeId" ></p>
-            <p><label class="lblUpdateLeave" for="FromDate">From Time </label><input type="datetime" class="txtUpdateLeave"  id="txtFromdate"        name="txtFromdate"></p>
-            <p><label class="lblUpdateLeave" for="ToDate"> To Time</label><input type="datetime" class="txtUpdateLeave"  id="txtToDate"   name="txtToDate"></p>
-            <p><label class="lblUpdateLeave" for="Comments">Comments</label> <textarea rows="5"cols="50"   id="txtComments"        name="txtComments"></textarea> </p>
-            <p style="padding-top:30px;"><span style="padding:20px;"></span><input type="button" name="Submit" id="btnUpdateLeave" value="Submit"></p>
+    <form id="Shift" name="Shift">
+        <div class="title">Shift</div>
+        <fieldset id="fsShift">
+            <p> <label class="lblAttendance" for="ShiftId"> Shift Id </label><input type="text" class="txtAttendance"  id ="txtShiftId"  name="txtShiftId"></p>
+            <p><label class="lblAttendance" for="ShiftName">Shift Name</label><input type ="text"class="txtAttendance"  id="txtShiftName"      name="txtShiftName" ></p>
+            <p><label class="lblAttendance" for="FromTime">FromTime </label><input type="time" class="txtAttendance"  id="txtFromTime"        name="txtFromTime"></p>
+            <p><label class="lblAttendance" for="ToTime"> ToTime</label><input type="time" class="txtAttendance"  id="txtToTime"   name="txtToTime"></p>
+            <p><label class="lblAttendance" for="Comments">Comments</label> <textarea rows="5"cols="50"   id="txtComments"        name="txtComments"></textarea> </p>
+            <p style="padding-top:30px;">
+                <span style="padding:10px;"></span><input type="button" name="Submit" id="btnGetShift" class="btnAttendance" value="GetShift">
+                <span style="padding:10px;"></span><input type="button" class="btnAttendance" name="Submit" id="btnAddShift" value="AddShift">
+                <span style="padding:10px;"></span><input type="button" class="btnAttendance" name="Submit" id="btnUpdateShift" value="UpdateShift">
+                 <span style="padding:10px;"></span><input type="button" class="btnAttendance" name="Submit" id="btnDeleteShift" value="DeleteShift">
+         </p>
+        
         </fieldset>
     </form>
 </div>

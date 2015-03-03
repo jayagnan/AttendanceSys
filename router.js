@@ -1,6 +1,8 @@
 var employee = require('./scripts/Employee');
 var department = require('./scripts/Department');
 var shiftalloc = require('./scripts/ShiftAlloc');
+var leave      = require('./scripts/Leave');
+var shift      = require('./scripts/Shift');
 var att = require('./scripts/Attendance');
 var report = require('./scripts/Report');
 
@@ -112,6 +114,7 @@ function route(pathname,request,response,data){
 		}
 
 		if(request.method === 'PUT'){
+			console.log("Inside router shiftalloc PUT  data => "+data);
 			shiftalloc.addShiftAllocation(response,data);	
 
 		}
@@ -121,7 +124,6 @@ function route(pathname,request,response,data){
 		}
 	}
 
-
 	if(pathname.indexOf('/attendance/shiftallocdept/') !== -1){
 
 		if(pathname === '/attendance/shiftallocdept/GET' ){
@@ -129,6 +131,73 @@ function route(pathname,request,response,data){
 				shiftalloc.getShiftAllocationForDept(response,data);
 		}
 	}
+	/*********************SHIFT ALLOCATION***************************/
+	/*********************SHIFT***************************/
+
+ 	if(pathname.indexOf('/attendance/shift/') !== -1){
+
+		if(request.method === 'GET'){
+			console.log("PathName => "+ pathname + "GET Request");
+			if(data === null){
+				shift.getShift(response);
+			}
+			else{				
+				shift.getShiftById(response,data);
+			}
+		}
+
+		if(request.method === 'POST'){
+			if(pathname === '/attendance/shift/GET' ){
+				shift.getShiftById(response,data);
+			}else{
+				shift.updateShift(response,data);
+			}
+		}
+
+		if(request.method === 'PUT'){
+			console.log("Inside router shift PUT  data => "+data);
+			shift.addShift(response,data);			
+		}
+		
+		if(request.method === 'DELETE'){
+			shift.deleteShift(response,data);			
+		}
+	}
+
+	/*********************SHIFT***************************/
+	/*********************LEAVE***************************/
+
+if(pathname.indexOf('/attendance/leave/') !== -1){
+
+		if(request.method === 'GET'){
+			console.log("PathName => "+ pathname + "GET Request");
+			if(data === null){
+				leave.getLeaves(response);
+			}
+			else{				
+				leave.getLeaveById(response,data);
+			}
+		}
+
+		if(request.method === 'POST'){
+			if(pathname === '/attendance/leave/GET' ){
+				leave.getLeaveById(response,data);
+			}else{
+				leave.updateLeave(response,data);
+			}
+		}
+
+		if(request.method === 'PUT'){
+			leave.addLeave(response,data);			
+		}
+		
+		if(request.method === 'DELETE'){
+			leave.deleteLeave(response,data);			
+		}
+	}
+
+	/*********************LEAVE***************************/
+
 
 	/*********************ATTENDANCE***************************/
 

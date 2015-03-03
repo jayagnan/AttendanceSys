@@ -10,7 +10,7 @@ module.exports={
 							});
 						},
 		getShiftById : function(shift,callback){
-							var qry = query.getShiftByIdQry(Shift);
+							var qry = query.getShiftByIdQry(shift);
                                                         executeQuery(qry,function(err,results){
                                                                 if(err){
 								       callback(err,results);
@@ -18,11 +18,10 @@ module.exports={
 							        var obj = results.rows[0];
 								if(obj){
 									var Shift = {};
-									Shift.ShiftId = obj.ShiftId;
-									Shift.EmployeeId = obj.EmployeeId;
-									
-									var time = new time(obj.time);
-									emp.DateOfJoin = date.getFullYear()+"-"+wrapDate(date.getMonth() + 1)+"-"+wrapDate(date.getDate());
+									Shift.ShiftId = obj.shiftid;
+									Shift.ShiftName = obj.shiftname;
+									Shift.FromTime = obj.fromtime;
+									Shift.ToTime  = obj.totime;
 									Shift.comments= obj.comments;
 									results.rows = Shift;
 								}
@@ -33,8 +32,8 @@ module.exports={
                                                         
 						
 		addShift : function(shift,callback){
-
-							var addQry = query.getAddShiftQry();
+							console.log("Shift JS == shift "+JSON.stringify(shift));
+							var addQry = query.getAddShiftQry(shift);
 							console.log("Inside Shift DS:: => "+addQry);
 							executeQuery(addQry,function(err,results){
 								console.log("Inside Shift DS, ** Callback ** :: => "+JSON.stringify(results));
@@ -45,13 +44,13 @@ module.exports={
 							
 		updateShift : function(shift,callback){
 							var updateqry = query.getUpdateShiftQry(shift);
-							executeQuery(qry,function(err,results){
+							executeQuery(updateqry,function(err,results){
 								callback(err,results);
 							});
 						},
 		deleteShift : function(shift,callback){
 							var deleteqry = query.getDeleteShiftQry(shift);
-							executeQuery(qry,function(err,results){
+							executeQuery(deleteqry,function(err,results){
 								callback(err,results);
 							});
 						}											

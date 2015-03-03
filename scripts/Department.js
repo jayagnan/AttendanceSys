@@ -14,7 +14,9 @@ module.exports={
 							});
 						},
 	getDepartmentById : function(res,jsonStr){
-							var Department = JSON.parse(jsonStr);
+							
+                                                        console.log("JSON STRING =>"+jsonStr);
+                                                        var Department = JSON.parse(jsonStr);
 							depDs.getDepartmentById(Department,function(err,results){
 								if(err){
 									console.log(err);

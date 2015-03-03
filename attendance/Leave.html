@@ -2,21 +2,27 @@
 <head></head>
 <body bgcolor="#a9a9a9">
 
-<div id="UpdateLeave">
+<div id="Leave">
 
     <form id="Leave" name="Leave">
-        <div id="titleUpdateLeave">Update Leave</div>
-        <fieldset id="fsUpdateLeave">
-            <p> <label class="lblUpdateLeave" for="EmployeeId"> Employee Id </label><input type="text" class="txtUpdateLeave"  id ="txtEmployeeId"  name="txtEmployeeId"></p>
-            <p><label class="lblUpdateLeave" for="FromDate">From date</label><input type ="date"class="txtUpdateLeave"  id="txtFromdate"      name="txtfromdate" ></p>
-            <p><label class="lblUpdateLeave" for="ToDate">To date </label><input type="date" class="txtUpdateLeave"  id="txtTodate"        name="txttodate"></p>
-            <p><label class="lblUpdateLeave" for="Reason"> Reason </label><input type="textarea" class="txtUpdateLeave"  id="txtReason"   name="txtReason"></p>
-            <p><label class="lblUpdateLeave" for="Comments">Comments</label> <textarea rows="5"cols="50"   id="txtComments"        name="txtComments"></textarea> </p>
-            <p style="padding-top:30px;"><span style="padding:20px;"></span><input type="button" name="Submit" id="btnUpdateLeave" value="Submit"></p>
+        <div class="title"> Leave</div>
+        <fieldset id="fsLeave">
+            <p> <label class="lblAttendance" for="LeaveId"> LeaveId </label><input type="text" class="txtAttendance"  id ="txtLeaveId"  name="txtLeaveId"></p>
+            <p> <label class="lblAttendance" for="EmployeeId"> EmployeeId </label><input type="text" class="txtAttendance"  id ="txtEmployeeId"  name="txtEmployeeId"></p>
+            <p><label class="lblAttendance" for="FromDate">FromDate</label><input type ="date"class="txtAttendance"  id="txtFromDate"      name="txtFromDate" ></p>
+            <p><label class="lblAttendance" for="ToDate">ToDate </label><input type="date" class="txtAttendance"  id="txtToDate"        name="txtToDate"></p>
+            <p><label class="lblAttendance" for="Reason"> Reason </label><input type="textarea" class="txtAttendance"  id="txtReason"   name="txtReason"></p>
+            <p><label class="lblAttendance" for="Comments">Comments</label> <textarea rows="5"cols="50"   id="txtComments"        name="txtComments"></textarea> </p>
+            <p><label class ="lblAttendance" for="ApproverId">Approver Id</label><input type="text" class="txtAttendance" id="txtApproverId" name="txtApproverId"></p>
+            <p style="padding-top:30p;">
+                <span style="padding:10px;"></span><input type="button" name="Submit" id="btnGetLeave" class="btnAttendance" value="GetLeave">
+                <span style="padding:10px;"></span><input type="button" class="btnAttendance" name="Submit" id="btnAddLeave" value="AddLeave">
+                <span style="padding:10px;"></span><input type="button" class="btnAttendance" name="Submit" id="btnUpdateLeave" value="UpdateLeave">
+                 <span style="padding:10px;"></span><input type="button" class="btnAttendance" name="Submit" id="btnDeleteLeave" value="DeleteLeave">
+            
+</p>
         </fieldset>
     </form>
 </div>
-
-
 </body>
 </html>

@@ -14,47 +14,49 @@ module.exports={
 							});
 						},
 	getShiftById : function(res,jsonStr){
+		                    console.log("JSON STRING =>"+jsonStr);
 							var shift = JSON.parse(jsonStr);
 							shtDs.getShiftById(shift,function(err,results){
 								if(err){
 									console.log(err);
-									res.write("Unable to get shift info!!!");
+									res.end("Unable to get shift info!!!");
 								}
 								console.log("=>Got shift information from DB!!!"+JSON.stringify(results.rows));
-								res.write(JSON.stringify(results.rows));
+								res.end(JSON.stringify(results.rows));
 							});
 						},
 	addShift : function(res,jsonStr){
 						var shift = JSON.parse(jsonStr);
-						shtDs.addShift(shift,function(err,res){
+						console.log("Inside shiftjs shift PUT  data => "+shift);
+						shtDs.addShift(shift,function(err,results){
 							if(err){
 								console.log(err);
-								res.write("Unable to add Shift record!!!");
+								res.end("Unable to add Shift record!!!");
 							}
 							console.log("=>Shift record added successfully!!!");
-							res.write("Shift record added successfully!!!");
+							res.end("Shift record added successfully!!!");
 						});
 					},
 	updateShift : function(res,jsonStr){
 						var Shift = JSON.parse(jsonStr);
-						shtDs.updateShift(Shift,function(err,res){
+						shtDs.updateShift(Shift,function(err,results){
 							if(err){
 								console.log(err);
-								res.write("Unable to update Shift record!!!");
+								res.end("Unable to update Shift record!!!");
 							}
 							console.log("=>Shift record updated successfully!!!");
-							res.write("Shift record updated successfully!!!");
+							res.end("Shift record updated successfully!!!");
 						});
 					},
 	deleteShift : function(res,jsonStr){
 						var Shift = JSON.parse(jsonStr);
-						shtDs.deleteShift(Shift,function(err,res){
+						shtDs.deleteShift(Shift,function(err,results){
 							if(err){
 								console.log(err);
-								res.write("Unable to delete Shift record!!!");
+								res.end("Unable to delete Shift record!!!");
 							}
 							console.log("=>Shift record deleted successfully!!!");
-							res.write("Shift record deleted successfully!!!");
+							res.end("Shift record deleted successfully!!!");
 						});
 					}
 

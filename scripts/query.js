@@ -91,58 +91,59 @@ module.exports={
 
 	getLeaveByIdQry: function(leave){
 		var qry = "SELECT leaveid, employeeid, fromdate, todate, reason, comments, approverid FROM leave WHERE leaveid='{leaveid}'";
-		qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
+		qry=qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
 		return qry;
 	},
 
 	getAddLeaveQry: function(leave){
 		var qry = "INSERT INTO leave(leaveid, employeeid, fromdate, todate, reason, comments, approverid) VALUES ('{leaveid}', '{employeeid}', '{fromdate}', '{todate}', '{reason}', '{comments}', '{approverid}')";
-		qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
+		qry=qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
 		return qry;
 	},
 
 	getUpdateLeaveQry: function(leave){
 		var qry = "UPDATE leave SET leaveid='{leaveid}', employeeid='{employeeid}', fromdate='{fromdate}', todate='{todate}', reason='{reason}', comments='{comments}', approverid='{approverid}' WHERE leaveid='{leaveid}'";
-		qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
+		qry=qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
 		return qry;
 	},
 
 	getDeleteLeaveQry: function(leave){
 		var qry = "DELETE FROM leave WHERE leaveid='{leaveid}'";
-		qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
+		qry=qry.supplant({leaveid:leave.LeaveId,employeeid:leave.EmployeeId,fromdate:leave.FromDate,todate:leave.ToDate,reason:leave.Reason,comments:leave.Comments,approverid:leave.ApproverId});
 		return qry;
 	},
 
 	//SHIFT TABLE QUERIES
 
 	getAllShiftsQry: function(){
-		var qry = "SELECT shiftid, employeeid, fromtime, totime, comments  FROM shift";
+		var qry = "SELECT shiftid, shiftname, fromtime, totime, comments  FROM shift";
 		return qry;
 	},
 
 	getShiftByIdQry: function(shift){
-		var qry = "SELECT shiftid, employeeid, fromtime, totime, comments  FROM shift where shiftid='{shiftid}'";
-		qry.supplant({shiftid:shift.ShiftId,employeeid:shift.EmployeeId,fromtime:shift.FromTime, totime:shift.ToTime, comments:Shift.Comments});
+		var qry = "SELECT shiftid, shiftname, fromtime, totime, comments  FROM shift where shiftid='{shiftid}'";
+		qry=qry.supplant({shiftid:shift.ShiftId,shiftname:shift.ShiftName,fromtime:shift.FromTime, totime:shift.ToTime, comments:shift.Comments});
 		return qry;
 	},
 
 	getAddShiftQry: function(shift){
-		var qry = "INSERT INTO shift(shiftid, employeeid, fromtime, totime, comments) VALUES ('{shiftid}', '{employeeid}', '{fromtime}', '{totime}', '{comments}')";
-		qry.supplant({shiftid:shift.ShiftId,employeeid:shift.EmployeeId,fromtime:shift.FromTime, totime:shift.ToTime, comments:Shift.Comments});
+		var qry = "INSERT INTO shift(shiftid, shiftname, fromtime, totime, comments) VALUES ('{shiftid}', '{shiftname}', '{fromtime}', '{totime}', '{comments}')";
+		qry = qry.supplant({'shiftid':shift.ShiftId,'shiftname':shift.ShiftName,'fromtime':shift.FromTime, 'totime':shift.ToTime, 'comments':shift.Comments});
 		return qry;
 	},
 
 	getUpdateShiftQry: function(shift){
-		var qry = "UPDATE shift SET shiftid='{shiftid}', employeeid='{employeeid}', fromtime='{fromtime}', totime='{totime}', comments='{comments}' WHERE shiftid='{shiftid}'";
-		qry.supplant({shiftid:shift.ShiftId,employeeid:shift.EmployeeId,fromtime:shift.FromTime, totime:shift.ToTime, comments:Shift.Comments});
+		var qry = "UPDATE shift SET shiftid='{shiftid}', shiftname='{shiftname}', fromtime='{fromtime}', totime='{totime}', comments='{comments}' WHERE shiftid='{shiftid}'";
+		qry=qry.supplant({shiftid:shift.ShiftId,'shiftname':shift.ShiftName,fromtime:shift.FromTime, totime:shift.ToTime, comments:shift.Comments});
 		return qry;
 	},
 
 	getDeleteShiftQry: function(shift){
 		var qry = "DELETE FROM shift WHERE shiftid='{shiftid}'";
-		qry.supplant({shiftid:shift.ShiftId,employeeid:shift.EmployeeId,fromtime:shift.FromTime, totime:shift.ToTime, comments:Shift.Comments});
+		qry=qry.supplant({shiftid:shift.ShiftId,'shiftname':shift.ShiftName,fromtime:shift.FromTime, totime:shift.ToTime, comments:shift.Comments});
 		return qry;		
 	},
+
 
 	//SHIFT ALLOCATION QUERIES
 
@@ -153,26 +154,26 @@ module.exports={
 
 	getShiftAllocationByIdQry : function(shiftalloc){
 		var qry = "SELECT employeeid, shiftid, fromdate, todate FROM shiftallocation where employeeid='{employeeid}'";
-		qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
+		qry=qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
 		return qry;
 
 	},
 
 	getAddShiftAllocationQry : function(shiftalloc){
 		var qry = "INSERT INTO shiftallocation(employeeid, shiftid, fromdate, todate) VALUES ('{employeeid}', '{shiftid}', '{fromdate}', '{todate}')";
-		qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
+		qry=qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
 		return qry;
 	},
 
 	getUpdateShiftAllocationQry: function(shiftalloc){
-		var qry = "UPDATE shiftallocation SET employeeid='{employeeid}', shiftid='{shiftid}', fromdate'{fromdate}', todate='{todate}' WHERE employeeid='{employeeid}'";
-		qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
+		var qry = "UPDATE shiftallocation SET employeeid='{employeeid}', shiftid='{shiftid}', fromdate='{fromdate}', todate='{todate}' WHERE employeeid='{employeeid}'";
+		qry=qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
 		return qry;
 	},
 
 	getDeleteShiftAllocationQry: function(shiftalloc){
 		var qry = "DELETE FROM shiftallocation WHERE employeeid='{employeeid}'";
-		qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
+		qry=qry.supplant({employeeid:shiftalloc.EmployeeId, shiftid:shiftalloc.ShiftId, fromdate:shiftalloc.FromDate, todate:shiftalloc.ToDate});
 		return qry;
 	},
 

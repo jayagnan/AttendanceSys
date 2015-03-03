@@ -12,12 +12,10 @@ module.exports={
 		getDepartmentById : function(dep,callback){
 							var getDepByIdQry = query.getDepartmentByIdQry(dep);
 							executeQuery(getDepByIdQry,function(err,results){
-								if(err){
-									callback(err,results);
-								}
+								//callback(err,results);
 							
-
-                                var obj = results.rows[0];
+                              var obj = results.rows[0];
+                              console.log("Got department info from DB - DepartmentDS"+obj);
 								if(obj){
 									var dep = {};
 									dep.DepartmentId = obj.departmentid;
@@ -26,14 +24,14 @@ module.exports={
 									results.rows = dep;
 								}
 								callback(err,results);
+
 							});
-							
 						},
 		addDepartment : function(dep,callback){
 							var getAddQry = query.getAddDepartmentQry(dep);
-                                                        console.log("Inside Department DS:: => "+addQry);
+                             console.log("Inside Department DS:: => "+getAddQry);
 							executeQuery(getAddQry,function(err,results){
-                                                        console.log("Inside Department DS, ** Callback ** :: => "+JSON.stringify(results));
+                             console.log("Inside Department DS, ** Callback ** :: => "+JSON.stringify(results));
 
 								callback(err,results);
 							});
@@ -48,6 +46,5 @@ module.exports={
 							var deleteDepQry = query.getDeleteDepartmentQry(dep);
 							executeQuery(deleteDepQry,function(err,results){
 								callback(err,results);
-							});
-						}											
+							});						}											
 }

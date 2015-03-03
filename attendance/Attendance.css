@@ -18,6 +18,10 @@ a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 /*#titleDepartment{font-family:"Verdana"; font-size:15px;padding-left:20px;}*/
 .fsAttendance{border:0px;}
 #fsEmployee{border:0px;}
+#fsShift{border:0px;}
+#fsShiftAlloc{border:1px solid #d3d3d3;}
+#fsMarkAtt{border:1px solid #d3d3d3;}
+#fsLeave{border:0px;}
 .lblAttendance{width:150px;text-align:left;font-family:Verdana;font-size:15px;float:left;word-wrap:nobreak;padding-right:5px;}
 .txtAttendance{width:300px;height:23px;}
 .btnAttendance{width:150px;height:50px;font-family:"Verdana";}
@@ -49,8 +53,6 @@ a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 //Report 
 //Calendar
 .day{color:#F6F4F0;font-family:verdana;font-size:12px;}
-
-
 
 
 
