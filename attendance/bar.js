@@ -1,8 +1,8 @@
 function drawBarChart(data){
 
-			var width = 600, height = 600;
+			var width = 700, height = 600;
 			var barWidth = 25;
-			var chartWidth = 600, chartHeight = 400;
+			var chartWidth = 700, chartHeight = 400;
 			var margin = {top: 20, right: 30, bottom: 30, left: 60},
 					    width = width - margin.left - margin.right,
 					    height = height - margin.top - margin.bottom;
