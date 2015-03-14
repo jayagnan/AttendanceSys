@@ -48,6 +48,12 @@ a.hrefmenuitem:hover,a.hrefmenuitem:active{color:#B4009E;}
 .txtMarkAttendance{width:300px;height:23px;}
 #btnMarkAttendance{width:150px;height:50px;font-family:"Verdana";}
 
+/*Create Account html display */
+#titleCreateAccount{font-family:"Gabriola"; font-size:50px;padding-left:20px;}
+#fsUser{border:0px;}
+.lblCreateAccount{width:150px;text-align:left;font-family:Verdana;font-size:15px;float:left;word-wrap:nobreak;padding-right:5px;}
+.txtCreateAccount{width:300px;height:23px;}
+#btnCreateAccount{width:150px;height:50px;font-family:"Verdana";}
 
 
 //Report 

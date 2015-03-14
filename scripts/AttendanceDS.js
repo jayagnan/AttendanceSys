@@ -78,5 +78,18 @@ module.exports={
 
 							}
 
-						}			
-					}
+						},
+    addAccount : function(user,callback){
+  							var qry = query.getAddUserAccountQry(user);
+							executeQuery(qry,function(err,results){
+								callback(err,results);
+							});  	
+    					},
+   getUserIdAndPasshash : function(user,callback){
+  							var qry = query.getSaltAndPasshashQry(user);
+							executeQuery(qry,function(err,results){
+								callback(err,results);
+							});  	
+    					}
+
+	}	

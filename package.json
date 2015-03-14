@@ -4,7 +4,8 @@
   "description": "Attendance System",
   "main": "httpServer.js",
   "dependencies": {
-    "pg": "~4.2.0"
+    "pg": "~4.2.0",
+    "password-hash": "^1.2.2"
   },
   "devDependencies": {},
   "scripts": {

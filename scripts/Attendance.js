@@ -1,4 +1,5 @@
 var attDS = require('./AttendanceDS');
+var passhash = require('password-hash');
 
 module.exports={
 
@@ -98,7 +99,78 @@ module.exports={
 
 						});
 
-					}					
+					},
+	addAccount: 	function(res,jsonStr){
+
+					/*
+					Incoming JSON
+					user = {userid,password,accounttype}
+					*/
+						var user = JSON.parse(jsonStr);
+						var options = {};
+						options.algorithm = 'sha512';
+						options.saltLength = 10;
+						options.iterations = 1;
+
+						var hashedpass = passhash.generate(user.password,options);
+						user.hashedpass = hashedpass;
+						var arrPass = hashedpass.split("$");
+						user.salt = arrPass[1];
+
+						console.log("attendance js => "+ JSON.stringify(user));
+
+						attDS.addAccount(user,function(err,results){
+							if(err){
+								console.log("Error :: "+JSON.stringify(err));
+								res.writeHead(200, {'content-type': 'text/plain'});
+								res.end("Unable to add account !!! - "+err.detail);
+							}
+							else{
+								res.end("Added account successfully");
+							}
+
+						});
+	},
+	validateUser :	function(res,jsonStr)	{
+							var user = JSON.parse(jsonStr);
+							attDS.getUserIdAndPasshash(user,function(err,results){
+								if(err){
+									console.log("Error :: "+JSON.stringify(err));
+									res.writeHead(200, {'content-type': 'text/plain'});
+									res.end("Unable to get account !!! - "+err.detail);
+								}
+								else{
+									var dbuser = results.rows[0];
+									console.log(JSON.stringify(dbuser));
+									console.log("pass "+user.password);
+									console.log("dbuser "+dbuser.hashedpass);
+									var hasPermission = passhash.verify(user.password,dbuser.passhash);
+									if(hasPermission){
+										if(dbuser.acctype && user.acctype === dbuser.acctype){
+											console.log("User id and pass validated successfully");
+											var approval = {};
+											approval.approved = 1;
+											approval.acctype = dbuser.acctype;
+											res.end(JSON.stringify(approval));
+										} else {
+											console.log("User id and pass failed validation");
+											var approval = {};
+											approval.approved = 0;
+											approval.acctype = "User Id and Password not valid for acctype";
+											res.end(JSON.stringify(approval));
+										}
+									} else{
+										console.log("User id and pass failed validation2");
+											var approval = {};
+											approval.approved = 0;
+											approval.acctype = "User Id and Password not valid for acctype";
+											res.end(JSON.stringify(approval));
+									}
+									
+								}
+
+							});	
+	}			
 
 		
 }

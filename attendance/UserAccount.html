@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<link href="Attendance.css" rel="stylesheet" type="text/css">
+		<script src="jquery-2.0.3.js"></script>
+		<script src="Attendance.js"></script>
+	</head>
+	<body>
+		<div id="page">
+			<div id="header"> Attendance and Leave management</div>
+			<div id="contents" >
+				<div id="titleCreateAccount">Create Account</div>
+				<fieldset id="fsUser" class="fsUser">
+					<span style="padding:10px;"></span>
+	            	<label class="lblCreateAccount" for="UserId"> UserId: </label>
+	            	<input type="text" class="txtCreateAccount" id="txtUserId"></input>
+	            	<p>
+	            	<span style="padding:10px;"></span>
+	            	<label class="lblCreateAccount" for="Password"> Password: </label>
+	            	<input type="password" class="txtCreateAccount" id="pwdPassword"></input>
+	            	<p>
+	            	<span style="padding:10px;"></span>
+	            	<label class="lblCreateAccount" for="AccType"> Account Type: </label>
+	            	<select id="slctAccType" name ="slctAccType" class="slctAttendance" >
+	            		<option value="User" >User</option>
+	            		<option value="Admin" >Admin</option>
+	            	</select>
+	            	<p>&nbsp;</p>
+	            	<span style="padding:10px;"></span>
+            	<input type="button" name="btnSubmit" id="btnCreateAccount" class="btnCreateAccount" value="Submit">
+	            </fieldset>
+			</div>
+		</div>
+	</body>
+</html>

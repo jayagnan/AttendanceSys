@@ -238,6 +238,12 @@ if(pathname.indexOf('/attendance/leave/') !== -1){
 
 	}
 
+	if(pathname.indexOf('/attendance/user/addaccount') !== -1){
+		att.addAccount(response,data);
+	}
+	if(pathname.indexOf('/attendance/user/validateuser') !== -1){
+		att.validateUser(response,data);
+	}
 
 
 }

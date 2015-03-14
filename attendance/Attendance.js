@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+var userapproval = 0;
+var useracctype = "";
 
 	/* Script for menu items on Portfolio template page */
 
@@ -14,6 +16,9 @@ $(document).ready(function(){
 	        day = "0" + day;
 	    var today = now.getFullYear() + '-' + month + '-' + day;
 	   
+	   userapproval = localStorage.getItem("userapproval");
+	   //alert(userapproval);
+	    if(userapproval==='1'){
 
 		$("#contents").load("Attendance.html",function(responseTxt,statusTxt,xhr){
 			$("#contents").css("height","800px");
@@ -22,21 +27,24 @@ $(document).ready(function(){
 
 					$("#dtAttendance").val(today);
 					getDepartments(function(jsonStr){
-						alert(jsonStr);
+						//alert(jsonStr);
 						populateDept("slctDepartment",jsonStr);
 					});
 
-								//alert("External content loaded successfully");
-								//alert(responseTxt);
+								////alert("External content loaded successfully");
+								////alert(responseTxt);
 				}
 				if(statusTxt == "error"){
-					alert("Error :" + xhr.status + ": " + xhr.statusText);
+					//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 				}
 
 			});
 
-
+	  }
+	  else {
+	  	$("#contents").html("Authorization required - Login with correct credentials");
+	  }
 
 	});
 
@@ -44,75 +52,99 @@ $(document).ready(function(){
 
 		$("#hrefUpdateLeave").click(function(){
 
+		userapproval = localStorage.getItem("userapproval");
+	  
+	    if(userapproval==='1'){
+
+
 			$("#contents").load("Leave.html",function(responseTxt,statusTxt,xhr){
 
 					if(statusTxt == "success"){
-									//alert("External content loaded successfully");
-									//alert(responseTxt);
+									////alert("External content loaded successfully");
+									////alert(responseTxt);
 					}
 					if(statusTxt == "error"){
-						alert("Error :" + xhr.status + ": " + xhr.statusText);
+						//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 					}
 
 				});
 
-
+		}
 
 		});
 
 	$("#hrefAddEmployee").click(function(){
+
+		 useracctype = localStorage.getItem("useracctype");
+	   //alert(useracctype);
+	    if(useracctype==='Admin'){
+
 
 		$("#contents").load("Employee.html",function(responseTxt,statusTxt,xhr){
 			$("#contents").css("height","800px");
 			$("#menu").css("height","800px");
 
 			if(statusTxt == "success"){
-				//alert("External content loaded successfully");
-				//alert(responseTxt);
+				////alert("External content loaded successfully");
+				////alert(responseTxt);
 			}
 			if(statusTxt == "error"){
-				alert("Error :" + xhr.status + ": " + xhr.statusText);
+				//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 			}
 
 		});
+
+	}
 	});
 
 	$("#hrefAddDepartment").click(function(){
+
+		useracctype = localStorage.getItem("useracctype");
+	   	//alert(useracctype);
+	    if(useracctype==='Admin'){
+
 
 		$("#contents").load("Department.html",function(responseTxt,statusTxt,xhr){
 			$("#contents").css("height","800px");
 			$("#menu").css("height","800px");
 
 			if(statusTxt == "success"){
-				//alert("External content loaded successfully");
-				//alert(responseTxt);
+				////alert("External content loaded successfully");
+				////alert(responseTxt);
 			}
 			if(statusTxt == "error"){
-				alert("Error :" + xhr.status + ": " + xhr.statusText);
+				//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 			}
 
 		});
+
+	}
 	});
 
 	$("#hrefAddShift").click(function(){
 			$("#contents").css("height","800px");
 			$("#menu").css("height","800px");
 
+		useracctype = localStorage.getItem("useracctype");
+	   	//alert(useracctype);
+	    if(useracctype==='Admin'){
+
 		$("#contents").load("Shift.html",function(responseTxt,statusTxt,xhr){
 
 			if(statusTxt == "success"){
-				//alert("External content loaded successfully");
-				//alert(responseTxt);
+				////alert("External content loaded successfully");
+				////alert(responseTxt);
 			}
 			if(statusTxt == "error"){
-				alert("Error :" + xhr.status + ": " + xhr.statusText);
+				//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 			}
 
 		});
+	}
 	});
 
 
@@ -120,48 +152,60 @@ $(document).ready(function(){
 			$("#contents").css("height","800px");
 			$("#menu").css("height","800px");
 
+		useracctype = localStorage.getItem("useracctype");
+	   	//alert(useracctype);
+	    if(useracctype==='Admin'){
+
 		$("#contents").load("ShiftAllocation.html",function(responseTxt,statusTxt,xhr){
 
 			if(statusTxt == "success"){
-				//alert("External content loaded successfully");
-				//alert(responseTxt);
+				////alert("External content loaded successfully");
+				////alert(responseTxt);
 				getDepartments(function(jsonStr){
-					alert(jsonStr);
+					//alert(jsonStr);
 					populateDept("slctDepartment",jsonStr);
 				});
 			}
 			if(statusTxt == "error"){
-				alert("Error :" + xhr.status + ": " + xhr.statusText);
+				//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 			}
 
 		});
+	}
 	});
 
 
 
 $("#hrefAttendanceReport").click(function(){
 
+		  userapproval = localStorage.getItem("userapproval");
+	   	//alert(userapproval);
+	    if(userapproval==='1'){
+
+
 		$("#contents").load("AttendanceReport.html",function(responseTxt,statusTxt,xhr){
 
 			if(statusTxt == "success"){
-				//alert("External content loaded successfully");
-				alert("Loaded report");
+				////alert("External content loaded successfully");
+				//alert("Loaded report");
 				getDepartments(function(jsonStr){
-					alert(jsonStr);
+					//alert(jsonStr);
 					populateDept("slctDepartment",jsonStr);
 				});
 				getUniqMonthYear(function(jsonStr){
-					alert(jsonStr);
+					//alert(jsonStr);
 					populateMonths("slctMonth",jsonStr);
 				});
 			}
 			if(statusTxt == "error"){
-				alert("Error :" + xhr.status + ": " + xhr.statusText);
+				//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 			}
 
 		});
+
+	}
 
 	});
 
@@ -172,7 +216,7 @@ $("#hrefAttendanceReport").click(function(){
 
 		//var json = JSON.stringify(emp);
 		getEmpByDept(emp,function(jsonStr){
-			alert(jsonStr);
+			//alert(jsonStr);
 			populateEmp("slctEmployee",jsonStr);
 		});
 	});
@@ -214,7 +258,7 @@ $("#hrefAttendanceReport").click(function(){
 	function getEmpByDept(emp,callback){
 
 		var jsonStr = JSON.stringify(emp);
-		alert(jsonStr);
+		//alert(jsonStr);
 		var url = "/attendance/employee/GETEMPBYDEPT";
 				$.ajax({
 
@@ -225,7 +269,7 @@ $("#hrefAttendanceReport").click(function(){
 				dataType:"",
 				processdata:true,
 				success: function(json){
-					alert(json);
+					//alert(json);
 					callback(json);
 				},
 				error:function(err){
@@ -291,11 +335,11 @@ $("#hrefAttendanceReport").click(function(){
 		$("#contents").load("ListProjectDetails.html",function(responseTxt,statusTxt,xhr){
 
 				if(statusTxt == "success"){
-								//alert("External content loaded successfully");
-								//alert(responseTxt);
+								////alert("External content loaded successfully");
+								////alert(responseTxt);
 				}
 				if(statusTxt == "error"){
-					alert("Error :" + xhr.status + ": " + xhr.statusText);
+					//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 				}
 
@@ -318,7 +362,7 @@ $("#hrefAttendanceReport").click(function(){
 		emp.Designation = $("#txtDesignation").val();
 
 		var jsonStr = JSON.stringify(emp);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -338,7 +382,7 @@ $("#hrefAttendanceReport").click(function(){
 		});
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -353,7 +397,7 @@ $("#hrefAttendanceReport").click(function(){
 		emp.Designation = $("#txtDesignation").val();
 
 		var jsonStr = JSON.stringify(emp);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -384,7 +428,7 @@ $("#hrefAttendanceReport").click(function(){
 		emp.Designation = $("#txtDesignation").val();
 
 		var jsonStr = JSON.stringify(emp);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -416,7 +460,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 		emp.Designation = $("#txtDesignation").val();
 
 		var jsonStr = JSON.stringify(emp);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -429,7 +473,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 				success: function(json){
 					//$("#contents").html(json);
 					var emps = JSON.parse(json);
-					//alert(emps);
+					////alert(emps);
 					$("#txtEmployeeId").val(emps.EmployeeId);
 					$("#txtEmployeename").val(emps.EmployeeName);
 					$("#txtDepartmentId").val(emps.DepartmentId);
@@ -445,7 +489,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -463,7 +507,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 
 
 		var jsonStr = JSON.stringify(dep);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -483,7 +527,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 		});
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -497,7 +541,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 		
 
 		var jsonStr = JSON.stringify(dep);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -527,7 +571,7 @@ $("#contents").on("click","#btnGetEmp",function(){
 		
 
 		var jsonStr = JSON.stringify(dep);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -557,7 +601,7 @@ $("#contents").on("click","#btnGetDept",function(){
 		dep.ManagerId = $("#txtManagerId").val();
 		
 		var jsonStr = JSON.stringify(dep);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -569,7 +613,7 @@ $("#contents").on("click","#btnGetDept",function(){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
+					//alert(json);
 					var deps = JSON.parse(json);
 					$("#txtDepartmentId").val(deps.DepartmentId);
 					$("#txtDepartmentName").val(deps.DepartmentName);
@@ -584,7 +628,7 @@ $("#contents").on("click","#btnGetDept",function(){
 
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -610,7 +654,7 @@ $("#contents").on("click","#btnAddLeave",function(){
 
 
 		var jsonStr = JSON.stringify(lev);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -630,7 +674,7 @@ $("#contents").on("click","#btnAddLeave",function(){
 		});
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -647,7 +691,7 @@ $("#contents").on("click","#btnAddLeave",function(){
 		lev.ApproverId = $("#txtApproverId").val();
 
 		var jsonStr = JSON.stringify(lev);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -681,7 +725,7 @@ $("#contents").on("click","#btnAddLeave",function(){
 
 
 		var jsonStr = JSON.stringify(lev);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -715,7 +759,7 @@ $("#contents").on("click","#btnGetLeave",function(){
 		lev.ApproverId = $("#txtApproverId").val();
 
 		var jsonStr = JSON.stringify(lev);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -727,7 +771,7 @@ $("#contents").on("click","#btnGetLeave",function(){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
+					//alert(json);
 					var levs = JSON.parse(json);
 					$("#txtLeaveId").val(levs.LeaveId);
 					$("#txtEmployeeId").val(levs.EmployeeId);
@@ -746,7 +790,7 @@ $("#contents").on("click","#btnGetLeave",function(){
 
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	
 });
@@ -768,7 +812,7 @@ $("#contents").on("click","#btnAddShift",function(){
 
 
 		var jsonStr = JSON.stringify(shf);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -788,7 +832,7 @@ $("#contents").on("click","#btnAddShift",function(){
 		});
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -804,7 +848,7 @@ $("#contents").on("click","#btnAddShift",function(){
 		
 
 		var jsonStr = JSON.stringify(shf);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -837,7 +881,7 @@ $("#contents").on("click","#btnAddShift",function(){
 
 
 		var jsonStr = JSON.stringify(shf);
-		//alert(jsonStr);
+		////alert(jsonStr);
 
 		$.ajax({
 
@@ -870,7 +914,7 @@ $("#contents").on("click","#btnGetShift",function(){
 		
 
 		var jsonStr = JSON.stringify(shf);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -882,10 +926,10 @@ $("#contents").on("click","#btnGetShift",function(){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
+					//alert(json);
 
 					var shfs = JSON.parse(json);
-					alert(shfs.FromTime.substring(0,8));
+					//alert(shfs.FromTime.substring(0,8));
 					$("#txtShiftId").val(shfs.ShiftId);
 					$("#txtShiftName").val(shfs.ShiftName);
 					$("#txtFromTime").val(shfs.FromTime.substring(0,8));
@@ -902,7 +946,7 @@ $("#contents").on("click","#btnGetShift",function(){
 
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 //***************************SHIFT*************************************************************
@@ -914,7 +958,7 @@ $("#contents").on("click","#btnGetShift",function(){
 
 		//drawBarChart();
 
-		alert("in get report");
+		//alert("in get report");
 
 		var rep = {};
 		var val = $("#slctMonth").val().split(",");
@@ -930,7 +974,7 @@ $("#contents").on("click","#btnGetShift",function(){
 
 
 			var jsonStr = JSON.stringify(rep);
-			alert(jsonStr);
+			//alert(jsonStr);
 
 			$.ajax({
 					type:"POST",
@@ -940,7 +984,7 @@ $("#contents").on("click","#btnGetShift",function(){
 					dataType:"",
 					processdata:true,
 					success: function(json){
-						alert("response "+json);
+						//alert("response "+json);
 						var reportList = JSON.parse(json);
 						drawCal(reportList);
 					},
@@ -956,7 +1000,7 @@ $("#contents").on("click","#btnGetShift",function(){
 
 
 			var jsonStr = JSON.stringify(rep);
-			alert(jsonStr);
+			//alert(jsonStr);
 
 			$.ajax({
 					type:"POST",
@@ -966,7 +1010,7 @@ $("#contents").on("click","#btnGetShift",function(){
 					dataType:"",
 					processdata:true,
 					success: function(json){
-						alert("response "+json);
+						//alert("response "+json);
 						var reportList = JSON.parse(json);
 						drawBarChart(reportList);
 					},
@@ -981,7 +1025,7 @@ $("#contents").on("click","#btnGetShift",function(){
 			var url = "/attendance/report/GETMONTHLY";
 
 			var jsonStr = JSON.stringify(rep);
-			alert(jsonStr + url);
+			//alert(jsonStr + url);
 
 			$.ajax({
 					type:"POST",
@@ -991,7 +1035,7 @@ $("#contents").on("click","#btnGetShift",function(){
 					dataType:"",
 					processdata:true,
 					success: function(json){
-						alert("response "+json);
+						//alert("response "+json);
 						var reportList = JSON.parse(json);
 						drawPieChart(reportList);
 					},
@@ -1016,7 +1060,7 @@ $("#contents").on("click","#btnGetShiftAllocDept",function(){
 
 
 		var jsonStr = JSON.stringify(shftalloc);
-		alert(jsonStr + url);
+		//alert(jsonStr + url);
 
 		$.ajax({
 
@@ -1028,15 +1072,15 @@ $("#contents").on("click","#btnGetShiftAllocDept",function(){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
+					//alert(json);
 					var shftallocs = JSON.parse(json);
-					//alert(shftallocs);
+					////alert(shftallocs);
 					var shft = {};
 					var html = "";
 					html = "<table>"
 					html += "<tr><th>EmpId</th><th>Empname</th><th>Department</th><th>Designation</th><th>ShiftId</th><th>Allocate</th></tr>";
 					for(var i=0;i<shftallocs.length;i++){
-						//alert(JSON.stringify(shftallocs[i]));
+						////alert(JSON.stringify(shftallocs[i]));
 						var empid = shftallocs[i].empid;
 						var empname = shftallocs[i].empname;
 						var department = shftallocs[i].department;
@@ -1073,7 +1117,7 @@ $("#contents").on("click",".btnalloc",function(data){
 			$('#txtEmployeeId').val(ele.id);
 		}
 		if(statusTxt == "error"){
-			alert("Error :" + xhr.status + ": " + xhr.statusText);
+			//alert("Error :" + xhr.status + ": " + xhr.statusText);
 
 		}
 
@@ -1082,7 +1126,7 @@ $("#contents").on("click",".btnalloc",function(data){
 
 $("#contents").on("click","#btnAddShiftAlloc",function(){
 
-	alert("add shift allloc");
+	//alert("add shift allloc");
 
 		var url = "/attendance/shiftalloc/";
 		var shft = {};
@@ -1095,7 +1139,7 @@ $("#contents").on("click","#btnAddShiftAlloc",function(){
 
 
 		var jsonStr = JSON.stringify(shft);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -1115,7 +1159,7 @@ $("#contents").on("click","#btnAddShiftAlloc",function(){
 		});
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -1130,7 +1174,7 @@ $("#contents").on("click","#btnAddShiftAlloc",function(){
 		
 
 		var jsonStr = JSON.stringify(shft);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -1162,7 +1206,7 @@ $("#contents").on("click","#btnAddShiftAlloc",function(){
 
 
 		var jsonStr = JSON.stringify(shft);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -1194,7 +1238,7 @@ $("#contents").on("click","#btnGetShiftAllocation",function(){
 		
 
 		var jsonStr = JSON.stringify(shft);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -1206,7 +1250,7 @@ $("#contents").on("click","#btnGetShiftAllocation",function(){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-					alert(json);
+					//alert(json);
 					var shfts = JSON.parse(json);
 					$("#txtEmployeeId").val(shfts.EmployeeId);
 					$("#txtShiftId").val(shfts.ShiftId);
@@ -1222,7 +1266,7 @@ $("#contents").on("click","#btnGetShiftAllocation",function(){
 
 
 
-		//alert("After the call");
+		////alert("After the call");
 
 	});
 
@@ -1232,7 +1276,7 @@ $("#contents").on("click","#btnGetShiftAllocation",function(){
 
 $("#contents").on("click","#btnGetAttendance",function(data){
 
-//	alert("In get attendance");
+//	//alert("In get attendance");
 		
 		$("#contents").css("height","1100px");
 		$("#menu").css("height","1100px");
@@ -1244,7 +1288,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 		att.Date = $("#dtAttendance").val();
 		
 		var jsonStr = JSON.stringify(att);
-		alert(jsonStr);
+		//alert(jsonStr);
 
 		$.ajax({
 
@@ -1256,7 +1300,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 				processdata:true,
 				success: function(json){
 					//$("#contents").html(json);
-		//			alert(json);
+		//			//alert(json);
 					var markatt = {};
 					markatt = JSON.parse(json);
 					var html = "<input type='hidden' id='attlist' value='"+json+"' /> <table><tr><th>EmployeeId</th><th>Emp Name</th><th>Department</th><th>Shift</th><th>Present</th><th>Absent</th><th>Leave</th></tr>";
@@ -1324,7 +1368,7 @@ $("#contents").on("click","#btnGetAttendance",function(data){
 
 $("#contents").on("click","#btnMarkAttendance", function(){
 
-//	alert("JSON - inside mark attendance");
+//	//alert("JSON - inside mark attendance");
 	var json = $("#attlist").val();
 	var attList = JSON.parse(json);
 
@@ -1374,6 +1418,107 @@ function checkNull(obj){
 
 	return obj === null ? "" : obj;
 }
+
+
+$("#contents").on("click","#btnCreateAccount",function(){
+
+//alert("In JS");
+	var url = "/attendance/user/addaccount";
+	var user = {};
+	user.userid = $("#txtUserId").val();
+	user.password = $("#pwdPassword").val();
+	user.acctype = $("#slctAccType").val();
+	
+
+	var jsonStr = JSON.stringify(user);
+	////alert(jsonStr);
+
+	$.ajax({
+
+			type:"PUT",
+			url:url,
+			data:jsonStr,
+			contentType:"",
+			dataType:"",
+			processdata:true,
+			success: function(json){
+				$("#contents").html(json);
+			},
+			error:function(err){
+				console.log(err);
+				$("#contents").html("Error Occured while adding user account!!!"+ err);
+			}
+	});
+
+
+	////alert("After the call");
+
+});
+
+$("#contents").on("click","#btnLogin",function(){
+
+//alert("In JS");
+	var url = "/attendance/user/validateuser";
+	var user = {};
+	user.userid = $("#txtUserId").val();
+	user.password = $("#pwdPassword").val();
+	user.acctype = $("#slctAccType").val();
+	
+
+	var jsonStr = JSON.stringify(user);
+	////alert(jsonStr);
+
+	$.ajax({
+
+			type:"PUT",
+			url:url,
+			data:jsonStr,
+			contentType:"",
+			dataType:"",
+			processdata:true,
+			success: function(json){
+				//alert("inside success "+json);
+					var jsonObj = JSON.parse(json);
+					 userapproval = jsonObj.approved;
+					 useracctype =  jsonObj.acctype;
+					 localStorage.setItem("userapproval",jsonObj.approved);
+					 localStorage.setItem("useracctype",jsonObj.acctype);
+					 //alert("app "+userapproval);
+					 //alert("actype "+useracctype);
+				$("#contents").html(JSON.stringify(json));
+
+				/*************************************************/
+				url = "/attendance/AttendanceTemplate.html";
+				$.ajax({
+
+					type:"GET",
+					url:url,
+					data:jsonStr,
+					contentType:"",
+					dataType:"",
+					processdata:true,
+					success: function(json){
+						$("#page").html(json);
+					},
+					error:function(err){
+						console.log(err);
+						$("#contents").html("Error Occured while loading template page!!!"+ err);
+					}
+			});
+
+				/*************************************************/
+
+			},
+			error:function(err){
+				console.log(err);
+				$("#contents").html("Error Occured while adding user account!!!"+ err);
+			}
+	});
+
+
+	////alert("After the call");
+
+});
 
 
 });

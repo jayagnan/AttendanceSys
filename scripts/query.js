@@ -309,6 +309,20 @@ module.exports={
 		var qry = "SELECT distinct extract(month from date) as month ,  extract (year from date) as year FROM attendance order by extract(month from date) ,  extract (year from date);";
 		return qry;
 
+	},
+
+	// User Id Login query
+	getAddUserAccountQry : function(user){
+
+		var qry = "INSERT INTO useraccount (userid, salt, passhash,acctype) VALUES ('{userid}', '{salt}', '{passhash}','{acctype}')";
+		qry = qry.supplant({userid:user.userid,salt:user.salt,passhash:user.hashedpass,acctype:user.acctype});
+		return qry;
+	},
+
+	getSaltAndPasshashQry : function(user){
+		var qry = "SELECT userid, salt, passhash,acctype FROM useraccount where userid = '{userid}'";
+		qry = qry.supplant({userid:user.userid});
+		return qry;
 	}
 
 
