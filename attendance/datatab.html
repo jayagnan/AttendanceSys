@@ -1,0 +1,28 @@
+<html>
+<head>
+		<link href="jquery.dataTables.min.css" rel="stylesheet" type="text/css">
+		<script src="jquery-2.0.3.js"></script>
+		<script src="jquery.dataTables.min.js"></script>
+	<title>Data table test</title>
+</head>
+<body>
+
+	<table id="emp">
+		<thead>
+			<tr><th>EmpNum</th><th>EmpName</th><th>Dept</th></tr>
+		</thead>
+		<tbody>
+			<tr><td>10000</td><td>Jay1</td><td>CEO</td></tr>
+			<tr><td>10001</td><td>Jay2</td><td>CEO</td></tr>
+			<tr><td>10002</td><td>Jay3</td><td>CEO</td></tr>
+			<tr><td>10003</td><td>Jay4</td><td>CEO</td></tr>
+			<tr><td>10004</td><td>Jay5</td><td>CEO</td></tr>
+		</tbody>
+	</table>
+<script>
+$(document).ready(function() {
+    $('#emp').DataTable();
+} );
+</script>
+</body>
+</html>

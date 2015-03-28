@@ -787,11 +787,7 @@ $("#contents").on("click","#btnGetLeave",function(){
 					$("#contents").html("Error Occured while Getting Leave!!!"+ err);
 				}
 		});
-
-
-
 		////alert("After the call");
-
 	
 });
 
@@ -1055,6 +1051,9 @@ $("#contents").on("click","#btnGetShift",function(){
 $("#contents").on("click","#btnGetShiftAllocDept",function(){
 
 		var url = "/attendance/shiftallocdept/GET";
+
+			$("#tblShiftAlloc").DataTable();
+
 		var shftalloc = {};
 		shftalloc.DepartmentId = $("#slctDepartment").val();
 
@@ -1077,8 +1076,8 @@ $("#contents").on("click","#btnGetShiftAllocDept",function(){
 					////alert(shftallocs);
 					var shft = {};
 					var html = "";
-					html = "<table>"
-					html += "<tr><th>EmpId</th><th>Empname</th><th>Department</th><th>Designation</th><th>ShiftId</th><th>Allocate</th></tr>";
+					html = "<table id='tblShiftAlloc'>"
+					html += "<thead><tr><th>EmpId</th><th>Empname</th><th>Department</th><th>Designation</th><th>ShiftId</th><th>Allocate</th></tr></thead><tbody>";
 					for(var i=0;i<shftallocs.length;i++){
 						////alert(JSON.stringify(shftallocs[i]));
 						var empid = shftallocs[i].empid;
@@ -1096,9 +1095,10 @@ $("#contents").on("click","#btnGetShiftAllocDept",function(){
 					html += "<tr><td>"+empid+"</td><td>"+empname+"</td><td>"+department+"</td><td>"+designation+"</td><td>"+shiftid+"</td><td>"+button+"</td></tr>";	
 
 					}
-					html += "</table>";
+					html += "</tbody></table>";
 
 					$("#divAllocTable").html(html);
+					$("#tblShiftAlloc").DataTable({"scrollX": true,"bAutoWidth":false});
 
 				},
 				error:function(err){
